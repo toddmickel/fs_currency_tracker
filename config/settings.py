@@ -133,3 +133,27 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# Constants for Models
+MISSION_CHOICES = [
+    ('LP', 'Leadplane'),
+    ('SJ', 'Smokejumper'),
+    ('PP', 'Pilot Proficiency'),
+    ('AD', 'Administrative'),
+    ('OT', 'Civilian/Military'),
+    ('AA', 'Air Attack'),
+    ('MT', 'Maintenance'),
+    ('LOG', 'Logistics'),
+    ('ASM', 'Aerial Supervision Module'),
+    ('HC', 'Helicopter'),
+    ('IR', 'Infrared'),
+    ('RC', 'Recon'),
+    ('PH', 'Photo'),
+    ('BC', 'Back Country'),
+]
+
+AIRCRAFT_TYPES = [
+    ('SD-3', 'Sherpa'),
+    ('KA', 'King Air'),
+    ('206', 'C-206')
+]
