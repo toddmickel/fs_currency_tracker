@@ -6,7 +6,7 @@ from django.conf import settings
 class FlightDetail(models.Model):
     pilot = models.ForeignKey(
         'User', 
-        on_delete=CASCADE, 
+        on_delete=models.CASCADE, 
         blank=False, 
         null=False
         )
@@ -20,6 +20,7 @@ class FlightDetail(models.Model):
     depart_ICAO = models.CharField(max_length=4, null=False, blank=False)
     arrival_ICAO = models.CharField(max_length=4, null=False, blank=False)
     msn_type = models.CharField(
+        max_length=20,
         choices=settings.MISSION_CHOICES,
         null=False, 
         blank=False,
@@ -49,10 +50,12 @@ class Aircraft(models.Model):
     ]
 
     tail_number = models.CharField(
+        max_length=10,
         choices=TAIL_NUMBERS,
         primary_key=True
         )
     aircraft_type = models.CharField(
+        max_length=15,
         choices=settings.AIRCRAFT_TYPES,
         null=False, 
         blank=False

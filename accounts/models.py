@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auto.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
 class User(AbstractUser):
@@ -26,7 +27,7 @@ class User(AbstractUser):
         )
     base = models.CharField(max_length=20, blank=True)
     office_phone = models.CharField(max_length=12, blank=True)
-    cell_phone = models.CharField(Max_length=12, blank=True)
+    cell_phone = models.CharField(max_length=12, blank=True)
     date_of_hire = models.DateField(null=True, blank=True)
     pilot_cert_number = models.CharField(max_length=20, blank=True)
     atp = models.BooleanField(default=False)
@@ -56,6 +57,7 @@ def __str__(self):
 class MsnQual(models.Model):
     pilot = models.ForeignKey('User', on_delete=models.CASCADE)
     mission = models.CharField(
+        max_length=20,
         choices=settings.MISSION_CHOICES,
         null=False,
         blank=False
@@ -68,6 +70,7 @@ class MsnQual(models.Model):
 class AcftQual(models.Model):
     pilot = models.ForeignKey('User', on_delete=models.CASCADE)
     acft = models.CharField(
+        max_length=15,
         choices=settings.AIRCRAFT_TYPES,
         null=False,
         blank=False
