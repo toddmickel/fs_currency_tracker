@@ -8,7 +8,7 @@ class FlightDetail(models.Model):
         'User', 
         on_delete=models.CASCADE, 
         blank=False, 
-        null=False
+        null=False,
         )
     date_of_flight = models.DateField(null=False, blank=False)
     tail_number = models.ForeignKey(

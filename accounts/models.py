@@ -16,7 +16,7 @@ class User(AbstractUser):
         ('10', 'Alaska'),
         ('WO', 'Washington Office'),
     ]
-    username = None
+    username = ''
     email = models.EmailField(_('email address'), unique=True)
     region = models.CharField(
         max_length=4, 
@@ -49,6 +49,7 @@ class User(AbstractUser):
     smokejumper_msn_eval_date = models.DateField(null=True, blank=True)
     equipment_eval_date = models.DateField(null=True, blank=True)
 
+    order = ('email',)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [] 
 
