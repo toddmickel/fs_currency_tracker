@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     REGION_CHOICES = [
         ('1', 'Northern'),
         ('2', 'Rocky Mountain'),
@@ -15,9 +15,9 @@ class User(AbstractUser):
         ('9', 'Eastern'),
         ('10', 'Alaska'),
         ('WO', 'Washington Office'),
-    ]
-    username = ''
-    email = models.EmailField(_('email address'), unique=True)
+    ] 
+    '''username = None
+    email = models.EmailField(_('email address'), unique=True)'''
     region = models.CharField(
         max_length=4, 
         choices=REGION_CHOICES,
@@ -42,21 +42,21 @@ class User(AbstractUser):
         on_delete=models.PROTECT, 
         limit_choices_to={'is_supervisor': True},
         blank=False, 
-        null=False
+        null=True
         )
     is_supervisor = models.BooleanField(default=False)
     is_captain = models.BooleanField(default=False)
     smokejumper_msn_eval_date = models.DateField(null=True, blank=True)
     equipment_eval_date = models.DateField(null=True, blank=True)
 
-    order = ('email',)
-    USERNAME_FIELD = 'email'
+    order = ('username',)
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = [] 
 
 def __str__(self):
     return last_name
 class MsnQual(models.Model):
-    pilot = models.ForeignKey('User', on_delete=models.CASCADE)
+    pilot = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     mission = models.CharField(
         max_length=20,
         choices=settings.MISSION_CHOICES,
@@ -69,7 +69,7 @@ class MsnQual(models.Model):
         return '%s %s' % (self.pilot, self.mission)
 
 class AcftQual(models.Model):
-    pilot = models.ForeignKey('User', on_delete=models.CASCADE)
+    pilot = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     acft = models.CharField(
         max_length=15,
         choices=settings.AIRCRAFT_TYPES,

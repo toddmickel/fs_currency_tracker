@@ -1,11 +1,11 @@
 from django.db import models
-from accounts.models import User
+from accounts.models import CustomUser
 from django.conf import settings
 
 
 class FlightDetail(models.Model):
     pilot = models.ForeignKey(
-        'User', 
+        'accounts.CustomUser', 
         on_delete=models.CASCADE, 
         blank=False, 
         null=False,
