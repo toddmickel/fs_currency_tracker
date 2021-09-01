@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd party apps
+    'crispy_forms',
 
     # locally developed apps
     'accounts',
+    'pages',
     'pilot_currency',
     'pilot_log',
 ]
@@ -157,3 +159,13 @@ AIRCRAFT_TYPES = [
     ('KA', 'King Air'),
     ('206', 'C-206')
 ]
+
+TAIL_NUMBERS = [
+    ('N162Z', 'N162Z'),
+    ('N163Z', 'N163Z'),
+    ('N174Z', 'N174Z'),
+    ('N176Z', 'N176Z'),
+]
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

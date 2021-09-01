@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from django.conf import settings
+from django.urls import reverse
 
 
 class FlightDetail(models.Model):
@@ -25,33 +26,29 @@ class FlightDetail(models.Model):
         null=False, 
         blank=False,
         )
-    pic_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    sic_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    instructor_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    pic_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    sic_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    instructor_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     total_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    act_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    sim_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    instrument_appchs = models.IntegerField(null=True, blank=True)
-    holds = models.IntegerField(null=True, blank=True)
-    day_landings = models.IntegerField(null=False, blank=False)
-    night_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    night_landings = models.IntegerField(null=True, blank=True)
+    act_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    sim_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    instrument_appchs = models.IntegerField(default=0)
+    holds = models.IntegerField(default=0)
+    day_landings = models.IntegerField(default=0)
+    night_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    night_landings = models.IntegerField(default=0)
     remarks = models.TextField(max_length=250, blank=True, default='')
 
     def __str__(self):
         return '%s %s' % (self.pilot, self.date_of_flight)
+    
+    def get_absolute_url(self):
+        return reverse('flight_detail', args=[str(self.id)])
 
 class Aircraft(models.Model):
-    TAIL_NUMBERS = [
-        ('N162Z', 'N162Z'),
-        ('N163Z', 'N163Z'),
-        ('N174Z', 'N174Z'),
-        ('N176Z', 'N176Z'),
-    ]
 
     tail_number = models.CharField(
         max_length=10,
-        choices=TAIL_NUMBERS,
         primary_key=True
         )
     aircraft_type = models.CharField(
@@ -60,6 +57,7 @@ class Aircraft(models.Model):
         null=False, 
         blank=False
     )
+
 
     def __str__(self):
         return self.tail_number
