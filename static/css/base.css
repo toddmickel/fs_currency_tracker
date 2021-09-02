@@ -1,0 +1,9 @@
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+header {
+    border-bottom: 1px solid black;
+    margin-bottom: 2rem;
+    display: flex;
+}

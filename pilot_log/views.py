@@ -1,4 +1,4 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightDetail
@@ -33,3 +33,7 @@ class FlightCreateView(LoginRequiredMixin, CreateView):
 class FlightDetailView(LoginRequiredMixin, DetailView):
     model = FlightDetail
     template_name = "flight_detail.html"
+
+class FlightListView(LoginRequiredMixin, ListView):
+    model = FlightDetail
+    template_name = "view_flights.html"

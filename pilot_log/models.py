@@ -39,8 +39,11 @@ class FlightDetail(models.Model):
     night_landings = models.IntegerField(default=0)
     remarks = models.TextField(max_length=250, blank=True, default='')
 
+    class Meta:
+        ordering = ['-date_of_flight']
+
     def __str__(self):
-        return '%s %s' % (self.pilot, self.date_of_flight)
+        return '%s |  %s' % (self.pilot, self.date_of_flight)
     
     def get_absolute_url(self):
         return reverse('flight_detail', args=[str(self.id)])
@@ -60,4 +63,4 @@ class Aircraft(models.Model):
 
 
     def __str__(self):
-        return self.tail_number
+        return f'{self.tail_number} | {self.aircraft_type}'
