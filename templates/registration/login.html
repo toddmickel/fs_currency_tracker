@@ -4,6 +4,7 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
+<<<<<<< HEAD
     <div class="col-md-6 login" style="max-width: 20%;">
         <h2>Log In</h2>
         <form method="POST">
@@ -12,4 +13,12 @@
             <button class="btn btn-success ml-2" type="submit">Log In</button>
         </form>
     </div>
+=======
+    <h2>Log In</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Log In</button>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+>>>>>>> caacc6b5ce5958509ecd51b3c0c1117a91f6037f
 {% endblock content %}

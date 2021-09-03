@@ -8,4 +8,4 @@
 
 8/31/2021:  Added templates and started views/urls.  (TS)
 
-9/1/2021:  Added additional templates and established login/logout/log entry functionality.  (TM)
+9/1/2021:  Added additional templates and established login/logout/log entry functionality.  Also fully implemented logbook entry and display.  (TM & TS)

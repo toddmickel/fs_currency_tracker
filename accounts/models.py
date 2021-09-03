@@ -66,7 +66,7 @@ class MsnQual(models.Model):
     mission_check_date = models.DateField(null=False, blank=False)
 
     def __str__(self):
-        return '%s %s' % (self.pilot, self.mission)
+        return '%s %s' % (self.pilot.last_name, self.mission)
 
 class AcftQual(models.Model):
     pilot = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
