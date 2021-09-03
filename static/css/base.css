@@ -1,0 +1,36 @@
+body {
+    font-family: 'Playfair Display', serif;
+    background: white url("/static/img/sf_logo4.jpg") no-repeat;
+    background-size: cover;
+}
+
+.navbar {
+    
+    background-color: green;
+    border-bottom: 2px solid green;
+    margin-bottom: 2rem;
+    display: flex;
+}
+
+.navbar-brand {
+    color:gold;
+}
+
+.navbar-brand:hover {
+    color:white;
+}
+
+.nav-link {
+    color:gold;
+}
+
+.nav-link:hover {
+    color:white;
+}
+
+.login {
+    color: black;
+    margin-left: 90rem;
+    font-weight: 30rem;
+    font-size: 2.0rem;
+}
