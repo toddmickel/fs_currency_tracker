@@ -1,8 +1,9 @@
-flight_new {
+style {
+    
     font-family: 'Playfair Display', serif;
-    background: white url("/static/img/oregon.jpeg") no-repeat;
+    background: white;
     background-size: cover;
-}
+}  
 
 .a2 {
     color: white;

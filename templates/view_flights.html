@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Flight Detail{% endblock title %}
+
+{% block additional_styles %}
+    <style>
+        body {
+            background-image: url(/static/img/montana.jpg);
+        }
+    </style>
+    {% endblock %}
 
 {% block content %}
 <h2 class="text-center">{{ user.first_name }} {{ user.last_name }}</h2>

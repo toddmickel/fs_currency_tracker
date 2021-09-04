@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
+
 {% block title %}New Flight{% endblock title %}
+
+{% block additional_styles %}
+    <style>
+        body {
+            background-image: url(/static/img/oregon.jpeg);
+        }
+    </style>
+    {% endblock %}
 
 {% block content %}
     <div class="container a2">
