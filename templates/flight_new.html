@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+
 {% block title %}New Flight{% endblock title %}
 
 {% block content %}
-<h1 class="text-center">New Flight</h1>
-<div class="container">
-<form method="post">
-    {% csrf_token %}
-    {{ form | crispy }}
-    <button class="btn btn-info ml-2" type="submit">Submit</button>
-</form>
-</div>
+    <div class="container a2">
+    <h1 class="text-center">New Flight</h1>
+    <form method="POST">
+        {{ form | crispy }}
+        <button class="btn btn-info a3" type="submit">Submit</button>
+    </form>
+    </div>
 {% endblock content %}

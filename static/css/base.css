@@ -1,6 +1,7 @@
+
+
 body {
     font-family: 'Playfair Display', serif;
-<<<<<<< HEAD
     background: white url("/static/img/sf_logo4.jpg") no-repeat;
     background-size: cover;
 }
@@ -34,12 +35,10 @@ body {
     margin-left: 90rem;
     font-weight: 30rem;
     font-size: 2.0rem;
-=======
 }
 
 header {
     border-bottom: 1px solid black;
     margin-bottom: 2rem;
     display: flex;
->>>>>>> caacc6b5ce5958509ecd51b3c0c1117a91f6037f
 }

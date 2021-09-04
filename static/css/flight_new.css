@@ -1,0 +1,25 @@
+flight_new {
+    font-family: 'Playfair Display', serif;
+    background: white url("/static/img/oregon.jpeg") no-repeat;
+    background-size: cover;
+}
+
+.a2 {
+    color: white;
+}
+
+.h1 {
+    color: white;
+}
+
+.a3 {
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+
+.a3:hover {
+    color: black;
+    background: yellow;
+    border-color: yellow;
+}
