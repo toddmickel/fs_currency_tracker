@@ -17,12 +17,20 @@
             href="{% static 'css/flight_new.css' %}"
             rel="stylesheet">
 
+        <link
+            href="{% static 'css/login.css' %}"
+            rel="stylesheet">
+
         <title>
             {% block title %}FS_Currency_Tracker{% endblock title %}
         </title>
+    {% block additional_styles %}
     <style>
-    
+        body {
+        background-image: url(images/base.jpg);
+        }
     </style>
+{% endblock %}
     </head>
     <body>   
         <nav class="navbar navbar-expand-lg navbar-nb2">
@@ -51,7 +59,7 @@
                     </ul>
 
                     {% else %}
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link active" href="{% url 'login' %}">Log In</a>
                         </li>
