@@ -1,0 +1,10 @@
+.a1 {
+    color: rgb(241, 220, 192);
+    background-color: rgb(88, 52, 5);   
+    border-radius: 10px; 
+}
+
+.a2 {
+    color: rgb(88, 52, 5);
+    background-color: rgb(241, 220, 192); 
+}
