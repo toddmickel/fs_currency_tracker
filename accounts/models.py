@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from django.urls import reverse
 
 class CustomUser(AbstractUser):
     REGION_CHOICES = [
@@ -53,8 +54,12 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = [] 
 
-def __str__(self):
-    return last_name
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse('profile', args=[str(self.id)])
+        
 class MsnQual(models.Model):
     pilot = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     mission = models.CharField(
