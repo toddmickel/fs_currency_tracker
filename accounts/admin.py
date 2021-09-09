@@ -2,14 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, MsnQual, AcftQual
 
-class UserProfilesAdmin(admin.ModelAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': (
-        'region',
-        'user_supervisor',
-        'is_supervisor',        
-        )}),
-    )
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = tuple(
