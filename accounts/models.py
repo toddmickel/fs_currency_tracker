@@ -6,15 +6,15 @@ from django.urls import reverse
 
 class CustomUser(AbstractUser):
     REGION_CHOICES = [
-        ('1', 'Northern'),
-        ('2', 'Rocky Mountain'),
-        ('3', 'Southwestern'),
-        ('4', 'Intermountain'),
-        ('5', 'Pacific Southwest'),
-        ('6', 'Pacific Northwest'),
-        ('8', 'Southern'),
-        ('9', 'Eastern'),
-        ('10', 'Alaska'),
+        ('1', '1 - Northern'),
+        ('2', '2 - Rocky Mountain'),
+        ('3', '3 - Southwestern'),
+        ('4', '4 - Intermountain'),
+        ('5', '5 - Pacific Southwest'),
+        ('6', '6 - Pacific Northwest'),
+        ('8', '8 - Southern'),
+        ('9', '9 - Eastern'),
+        ('10', '10 - Alaska'),
         ('WO', 'Washington Office'),
     ] 
     '''username = None
