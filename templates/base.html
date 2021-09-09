@@ -44,7 +44,7 @@
                 <a class="navbar-brand" href="{% url 'home' %}">Forest Service Flight Log</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {% if user.is_authenticated %}
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle pa_1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Pilot Actions
@@ -54,6 +54,17 @@
                                 <li><a class="dropdown-item pa_2" href="{% url 'flight_list' %}">View All Flights</a></li>
                             </ul>
                         </li>
+                        {% if user.is_supervisor %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle pa_1" href="#" id="SupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Supervisor Actions
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="SupDropdown">
+                                <li><a class="dropdown-item pa_2" href="#">Create User</a></li>
+                                <li><a class="dropdown-item pa_2" href="#">View Currency Board</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
                     </ul>
                     <ul class="navbar-nav flex-row-reverse">
                         <li class="nav-item dropdown">
@@ -62,25 +73,17 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Update Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change My Passwword</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                             </ul>
                         </li>
                     </ul>
-<!--                <ul class="navbar-nav flex-row-reverse">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ current_user.first_name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
-                            </ul>
-                        </li>
-                    </ul> -->
 
                     {% else %}
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active acct_1" href="{% url 'login' %}">Log In</a>
+
                         </li>
                     </ul>
                     <ul class="navbar-nav flex-row-reverse">
@@ -89,8 +92,9 @@
                                 Account
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'login' %}">Log In</a></li>
                                 <li><a class="dropdown-item" href="{% url 'password_reset' %}">Reset My Password</a></li>
-                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change My Passwword</a></li>
+
                             </ul>
                         </li>
                     </ul>
