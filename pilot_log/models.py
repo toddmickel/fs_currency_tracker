@@ -41,6 +41,7 @@ class FlightDetail(models.Model):
 
     class Meta:
         ordering = ['-date_of_flight']
+        get_latest_by = 'date_of_flight'
 
     def __str__(self):
         return '%s |  %s' % (self.pilot, self.date_of_flight)

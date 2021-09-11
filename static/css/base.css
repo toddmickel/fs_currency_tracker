@@ -6,8 +6,7 @@ body {
     background-size: cover;
 }
 
-.navbar {
-    
+.navbar {    
     background-color: green;
     border-bottom: 2px solid green;
     margin-bottom: 2rem;
@@ -19,22 +18,24 @@ body {
 }
 
 .navbar-brand:hover {
-    color:white;
-}
-
-.nav-link {
     color:gold;
 }
 
-.nav-link:hover {
+.pa_1 {
+    color:gold;
+}
+
+.pa_1:hover {
     color:white;
 }
 
-.login {
-    color: black;
-    
-    font-weight: 30rem;
-    font-size: 2.0rem;
+.pa_2 {
+    background-color: rgb(241, 220, 192);
+}
+
+.pa_2:hover {
+    color: rgb(241, 220, 192);
+    background-color: rgb(88, 52, 5);
 }
 
 header {
@@ -43,9 +44,26 @@ header {
     display: flex;
 }
 
-.active cf_1 {
+.cf_1 {
     background-image:url("/static/img/oregon.jpeg") no-repeat;
     font-family: 'Playfair Display', serif;
     background: white;
     background-size: cover;
+}
+
+.acct_1 {
+    color: gold;
+}
+
+.acct_1:hover {
+    color: white;
+}
+
+.pw_1 {
+    color: gold;
+    margin-right: 8rem;
+}
+
+.pw_1:hover {
+    color: white;
 }

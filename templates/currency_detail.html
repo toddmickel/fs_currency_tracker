@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+    
+
+{% block title %}Flight Detail{% endblock title %}
+
+{% block content %}
+    <p>{{ total_time }}</p>
+    <p>12 month: {{ 12_mo }}</p>
+    <p>12 month heavy: {{ 12_mo_heavy }}</p>
+    <p>6 month instrument approaches: {{ 6_mo_inst }}</p>
+    <p>6 month holds: {{ 6_mo_holds }}</p>
+    <p>90 day landings: {{ 90_day_landings }}</p>
+    <p>90 day night landings: {{ 90_day_nt_landings }}</p>
+    <p>90 day time: {{ 90_day_time }}</p>
+    <p>60 day time: {{ 60_day_time }}</p>
+    <p>Latest landing: {{ latest_ldg }}</p>
+    <p>Latest night landing: {{ latest_nt_ldg }}</p>
+{% endblock content %}
