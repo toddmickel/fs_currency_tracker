@@ -180,7 +180,7 @@ TAIL_NUMBERS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/pilot_currency'
 LOGOUT_REDIRECT_URL = 'home'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
