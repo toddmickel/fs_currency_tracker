@@ -151,7 +151,7 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
             context['last_sherpa_nt_ldg'] = last_sherpa_ldg
         except ObjectDoesNotExist:
             last_sherpa_nt_ldg = date(2900, 1, 1)
-            context['last_sherpa_nt_ldg'] = "None"
+            context['last_sherpa_nt_ldg'] = 'None'
 
         context['crit_nt_ldgs'] = get_crit_ldgs(
             date(2900, 1, 1), 0, 
@@ -160,17 +160,65 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
             )
 
         try:
-            context['last_landing'] = self.object_list.filter(
-                Q(day_langings__gt=0) |
-                Q(night_landings__gt=0)
-            ).latest().date_of_flight
-        except:
-            context['last_landing'] = "None"
+            sel_ninety_time = ninety_day.filter(tail_number__aircraft_type__contains='206').aggregate(Sum('total_time'))
+            sel_ninety_tt = float(f"{sel_ninety_time['total_time__sum']}")
+            context['sel_90_tt'] = sel_ninety_tt
+        except ObjectDoesNotExist:
+            sel_ninety_tt = 0
+            context['sel_90_tt'] = 0
+
+        try: 
+            last_sel_flt = self.object_list.filter(
+                tail_number__aircraft_type__contains='206'
+                ).filter(total_time__gt=0).latest().date_of_flight
+            context['last_sel_flt'] = last_sel_flt
+        except ObjectDoesNotExist:
+            last_sel_flt = date(2900, 1, 1)
+            context['last_sel_flt'] = 'None'
 
         try:
-            context['last_nt_ldg'] = self.object_list.filter(night_landings__gt=0).latest().date_of_flight
-        except:
-            context['last_nt_ldg'] = "None"
+            mel_ninety_time = ninety_day.filter(
+                Q(tail_number__aircraft_type__contains='SD-3') | 
+                Q(tail_number__aircraft_type__contains='King Air')).aggregate(Sum('total_time')
+                )
+            mel_ninety_tt = float(f"{mel_ninety_time['total_time__sum']}")
+            context['mel_90_tt'] = mel_ninety_tt
+        except ObjectDoesNotExist:
+            mel_ninety_tt = 0
+            context['mel_90_tt'] = 0
+        
+        try:
+            last_mel_flt = self.object_list.filter(
+                Q(tail_number__aircraft_type__contains='SD-3') | 
+                Q(tail_number__aircraft_type__contains='King Air')   
+                ).filter(total_time__gt=0).latest().date_of_flight
+            context['last_mel_flt'] = last_mel_flt
+        except ObjectDoesNotExist:
+            last_mel_flt = date(2900, 1, 1)
+            context['last_mel_flt'] = 'None'
+
+        try:
+            sherpa_ninety_time = ninety_day.filter(tail_number__aircraft_type__contains='SD-3').aggregate(Sum('total_time'))
+            sherpa_ninety_tt = float(f"{sherpa_ninety_time['total_time__sum']}")
+            context['sherpa_90_tt'] = sherpa_ninety_tt
+        except ObjectDoesNotExist:
+            sherpa_ninety_tt = 0
+            context['sherpa_90_tt'] = 0
+
+        try:
+            last_sherpa_flt = self.object_list.filter(
+                tail_number__aircraft_type__contains='SD-3'
+                ).filter(total_time__gt=0).latest().date_of_flight
+            context['last_sherpa_flt'] = last_sherpa_flt
+        except ObjectDoesNotExist:
+            last_sherpa_flt = date(2900, 1, 1)
+            context['last_sherpa_flt'] = 'None'
+
+        context['crit_90_tt'] = get_crit_tt(
+            last_sel_flt, sel_ninety_tt,
+            last_mel_flt, mel_ninety_tt,
+            last_sherpa_flt
+        )
 
         hours_ninety = ninety_day.aggregate(Sum('total_time'))
         context['90_day_time'] = float(f"{hours_ninety['total_time__sum']:.1f}")
@@ -180,12 +228,25 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
         return context   
 
 def get_crit_ldgs(
-    sel, sel_ldg, 
-    mel, mel_ldg, 
-    sherpa):
-    if sel < mel and sel < sherpa and sel_ldg != 0:
+    last_sel, sel_ldg, 
+    last_mel, mel_ldg, 
+    last_sherpa
+    ):
+    if last_sel < last_mel and last_sel < last_sherpa and sel_ldg > 0:
         return 'sel'
-    elif mel < sherpa and mel and mel_ldg !=0:
+    elif last_mel < last_sherpa and mel_ldg > 0:
         return 'mel'
     else:
         return 'sherpa'
+
+def get_crit_tt(
+    last_sel, sel_tt,
+    last_mel, mel_tt,
+    last_sherpa
+    ):
+    if last_sel < last_mel and last_sel < last_sherpa and sel_tt > 0:
+        return 'sel'
+    elif last_mel < last_sherpa and mel_ldg > 0:
+        return 'mel'
+    else:
+        return 'sherpa'    
