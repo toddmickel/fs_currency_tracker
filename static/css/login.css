@@ -1,20 +1,22 @@
 .a1 {
 
+    color: rgb(241, 220, 192);
+    background-color: rgb(88, 52, 5);   
     color: rgb(88, 52, 5);
     background-color: rgb(241, 220, 192);   
     border-radius: 10px; 
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .a2 {
     color: rgb(241, 220, 192);
     background-color: rgb(88, 52, 5); 
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
-
-    color: rgb(241, 220, 192);
-    background-color: rgb(88, 52, 5);   
+form {
+    color: rgb(88, 52, 5);
+    background-color: rgb(241, 220, 192);  
     border-radius: 10px; 
 }
 
@@ -22,4 +24,10 @@
     color: rgb(88, 52, 5);
     background-color: rgb(241, 220, 192); 
 }
+
+.a2 {
+    background-color: rgb(241, 220, 192);
+    border: rgb(241, 220, 192);
+}
+
 
