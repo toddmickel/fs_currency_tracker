@@ -5,174 +5,238 @@
 
 {% block content %}
     <div class="container">
-        <table class="table table-bordered">
+        <table class="table table-bordered border-dark">
             <thead>
                 <tr>
-                    <th scope="col" colspan="7" class="table-secondary">Forest Service Requirements</th>
+                    <th scope="col" colspan="7" class="table-secondary border-dark">Forest Service Requirements</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr>
-                    <th scope="col" colspan="2" class="table-info">Minimum Annual Requirements (Hours:)</th>
-                    <th scope="col" class="table-info text-center">Total</th>
+                    <th scope="col" colspan="2" class="table-info border-dark">Minimum Annual Requirements (Hours:)</th>
+                    <th scope="col" class="table-info text-center border-dark">Total</th>
                     <th scope="col" colspan="4" class="table-dark"></th>
                 </tr>
+
                 <tr>
-                    <td class="table-light">Flight Time (12 months)</td>
-                    <td class="table-light text-center">100</td>
+                    <td class="table-light border-dark">Flight Time (12 months)</td>
+                    <td class="table-light text-center border-dark">100</td>
                     {% if 12_mo < 100 %}
-                        <td class="table-danger text-center">{{ 12_mo }}</td>
+                        <td class="table-danger text-center border-dark">{{ 12_mo }}</td>
                     {% elif 12_mo < 120 %}
-                        <td class="table-warning text-center">{{ 12_mo }}</td>
+                        <td class="table-warning text-center border-dark">{{ 12_mo }}</td>
                     {% else %}
-                        <td class="table-success text-center">{{ 12_mo }}</td>
+                        <td class="table-success text-center border-dark">{{ 12_mo }}</td>
                     {% endif %}
                     <td colspan="4" class="table-dark"></td>
                 </tr>
+
                 <tr>
-                    <td class="table-light">Large Multi-Engine (12 months)</td>
-                    <td class="table-light text-center">25</td>
+                    <td class="table-light border-dark">Large Multi-Engine (12 months)</td>
+                    <td class="table-light text-center border-dark">25</td>
                     {% if 12_mo_heavy < 25 %}
-                        <td class="table-danger text-center">{{ 12_mo_heavy }}</td>
+                        <td class="table-danger text-center border-dark">{{ 12_mo_heavy }}</td>
                     {% elif 12_mo_heavy < 30 %}
-                        <td class="table-warning text-center">{{ 12_mo_heavy }}</td>
+                        <td class="table-warning text-center border-dark">{{ 12_mo_heavy }}</td>
                     {% else %}
-                        <td class="table-success text-center">{{ 12_mo_heavy }}</td>
+                        <td class="table-success text-center border-dark">{{ 12_mo_heavy }}</td>
                     {% endif %}
                     <td colspan = "4" class="table-dark"></td>
                 </tr>
+
                 <tr>
-                    <th scope="col" colspan="3" class="table-info">Preceding 6 Calendar Months Requirements</th>
-                    <th scope="col" colspan="2" class="table-info text-center">Last Accomplished</th>
-                    <th scope="col" class="table-info"></th>
+                    <th scope="col" colspan="3" class="table-info border-dark">Preceding 6 Calendar Months Requirements</th>
+                    <th scope="col" colspan="2" class="table-info text-center border-dark">Last Accomplished</th>
+                    <th scope="col" class="table-dark"></th>
                 </tr>
+
                 <tr>
-                    <td class="table-light">Instrument Approaches</td>
-                    <td class="table-light text-center">6</td>
+                    <td class="table-light border-dark">Instrument Approaches</td>
+                    <td class="table-light text-center border-dark">6</td>
                     {% if 6_mo_inst < 6 %}
-                        <td class="table-danger text-center">{{ 6_mo_inst }}</td>
-                        <td colspan="2" class="table-danger text-center">{{ latest_inst }}</td>
+                        <td class="table-danger text-center border-dark">{{ 6_mo_inst }}</td>
+                        <td colspan="2" class="table-danger text-center border-dark">{{ latest_inst }}</td>
                     {% elif 6_mo_inst < 10 %}
-                        <td class="table-warning text-center">{{ 6_mo_inst }}</td>
-                        <td colspan="2" class="table-warning text-center">{{ latest_inst }}</td>
+                        <td class="table-warning text-center border-dark">{{ 6_mo_inst }}</td>
+                        <td colspan="2" class="table-warning text-center border-dark">{{ latest_inst }}</td>
                     {% else %}
-                        <td class="table-success text-center">{{ 6_mo_inst }}</td>
-                        <td colspan="2" class="table-success text-center">{{ latest_inst }}</td>
+                        <td class="table-success text-center border-dark">{{ 6_mo_inst }}</td>
+                        <td colspan="2" class="table-success text-center border-dark">{{ latest_inst }}</td>
                     {% endif %}
                     <td colspan="2" class="table-dark"></td>
                 </tr>
+
                 <tr>
-                    <td class="table-light">Holding</td>
-                    <td class="table-light text-center">1</td>
+                    <td class="table-light border-dark">Holding</td>
+                    <td class="table-light text-center border-dark">1</td>
                     {% if 6_mo_holds < 1 %}
-                        <td class="table-danger text-center">{{ 6_mo_holds }}</td>
-                        <td colspan="2" class="table-danger text-center">{{ latest_hold }}</td>
+                        <td class="table-danger text-center border-dark">{{ 6_mo_holds }}</td>
+                        <td colspan="2" class="table-danger text-center border-dark">{{ latest_hold }}</td>
                     {% elif 6_mo_holds < 2 %}
-                        <td class="table-warning text-center">{{ 6_mo_holds }}</td>
-                        <td colspan="2" class="table-warning text-center">{{ latest_hold }}</td>   
+                        <td class="table-warning text-center border-dark">{{ 6_mo_holds }}</td>
+                        <td colspan="2" class="table-warning text-center border-dark">{{ latest_hold }}</td>   
                     {% else %}
-                        <td class="table-success text-center">{{ 6_mo_holds }}</td>
-                        <td colspan="2" class="table-success text-center">{{ latest_hold }}</td>   
+                        <td class="table-success text-center border-dark">{{ 6_mo_holds }}</td>
+                        <td colspan="2" class="table-success text-center border-dark">{{ latest_hold }}</td>   
                     {% endif %}
                     <td colspan="2" class="table-dark"></td>                   
                 </tr>
+
                 <tr>
-                    <th scope="col" colspan="2" class="table-info">Preceding 90 day Minimum Requirements</th>
-                    <th scope="col" class="table-info text-center">SEL</th>
-                    <th scope="col" class="table-info text-center">MEL</th>
-                    <th scope="col" class="table-info text-center">Sherpa</th>
-                    <th scope="col" class="table-info text-center">Last Accomplished</th>
+                    <th scope="col" colspan="2" class="table-info border-dark">Preceding 90 day Minimum Requirements</th>
+                    <th scope="col" class="table-info text-center border-dark">SEL</th>
+                    <th scope="col" class="table-info text-center border-dark">MEL</th>
+                    <th scope="col" class="table-info text-center border-dark">Sherpa</th>
+                    <th scope="col" class="table-info text-center border-dark">Last Accomplished</th>
                 </tr>
+
                 <tr>
-                    <td class="table-light">Takeoffs/Landings</td>
-                    <td class="table-light text-center">3</td>
+                    <td class="table-light border-dark">Takeoffs/Landings</td>
+                    <td class="table-light text-center border-dark">3</td>
 
                     {% if sel_landings > 5 %}
-                        <td class="table-success text-center">{{ sel_landings }}</td>
+                        <td class="table-success text-center border-dark">{{ sel_landings }}</td>
                     {% elif sel_landings > 2 %}
-                        <td class="table-warning text-center">{{ sel_landings }}</td>
+                        <td class="table-warning text-center border-dark">{{ sel_landings }}</td>
                     {% else  %}
-                        <td class="table-danger text-center">{{ sel_landings }}</td>  
+                        <td class="table-danger text-center border-dark">{{ sel_landings }}</td>  
                     {% endif %}
 
                     {% if mel_landings > 5 %}
-                        <td class="table-success text-center">{{ mel_landings }}</td>
+                        <td class="table-success text-center border-dark">{{ mel_landings }}</td>
                     {% elif mel_landings > 2 %}
-                        <td class="table-warning text-center">{{ mel_landings }}</td>
+                        <td class="table-warning text-center border-dark">{{ mel_landings }}</td>
                     {% else %}
-                        <td class="table-danger text-center">{{ mel_landings }}</td>  
+                        <td class="table-danger text-center border-dark">{{ mel_landings }}</td>  
                     {% endif %}   
 
                     {% if sherpa_landings > 5 %}
-                        <td class="table-success text-center">{{ sherpa_landings }}</td>
+                        <td class="table-success text-center border-dark">{{ sherpa_landings }}</td>
                     {% elif sherpa_landings > 2 %}
-                        <td class="table-warning text-center">{{ sherpa_landings }}</td>
+                        <td class="table-warning text-center border-dark">{{ sherpa_landings }}</td>
                     {% else %}
-                        <td class="table-danger text-center">{{ sherpa_landings }}</td> 
+                        <td class="table-danger text-center border-dark">{{ sherpa_landings }}</td> 
                     {% endif %}
                     
                     {% if crit_ldgs == 'sherpa' %}
                         {% if sherpa_landings > 5 %}
-                            <td class="table-success text-center">SD3: {{ last_sherpa_ldg }}</td>
+                            <td class="table-success text-center border-dark">SD3:&emsp;{{ last_sherpa_ldg }}</td>
                         {% elif sherpa_landings > 2 %}
-                            <td class="table-warning text-center">SD3: {{ last_sherpa_ldg }}</td>
+                            <td class="table-warning text-center border-dark">SD3:&emsp;{{ last_sherpa_ldg }}</td>
                         {% else %}
-                            <td class="table-danger text-center">SD3: {{ last_sherpa_ldg }}</td>
+                            <td class="table-danger text-center border-dark">SD3:&emsp;{{ last_sherpa_ldg }}</td>
                         {% endif %}
                     {% elif crit_ldgs == 'mel' %}
                         {% if mel_landings > 5 %}
-                            <td class="table-success text-center">MEL: {{ last_mel_ldg }}</td>
+                            <td class="table-success text-center border-dark">MEL:&emsp;{{ last_mel_ldg }}</td>
                         {% elif mel_landings > 2 %}
-                            <td class="table-warning text-center">MEL: {{ last_mel_ldg }}</td>
+                            <td class="table-warning text-center border-dark">MEL:&emsp;{{ last_mel_ldg }}</td>
                         {% else %}
-                            <td class="table-danger text-center">MEL: {{ last_mel_ldg }}</td>
+                            <td class="table-danger text-center border-dark">MEL:&emsp;{{ last_mel_ldg }}</td>
                         {% endif %}
                     {% elif crit_ldgs == 'sel' %}
                         {% if sel_landings > 5 %}
-                            <td class="table-success text-center">SEL: {{ last_sel_ldg }}</td>
+                            <td class="table-success text-center border-dark">SEL:&emsp;{{ last_sel_ldg }}</td>
                         {% elif sel_landings > 2 %}
-                            <td class="table-warning text-center">SEL: {{ last_sel_ldg }}</td>
+                            <td class="table-warning text-center border-dark">SEL:&emsp;{{ last_sel_ldg }}</td>
                         {% else %}
-                            <td class="table-danger text-center">SEL: {{ last_sel_ldg }}</td>
+                            <td class="table-danger text-center border-dark">SEL:&emsp;{{ last_sel_ldg }}</td>
                         {% endif %}
                     {% endif %}
                 </tr>
+
                 <tr>
-                    <td class="table-light">Night Takeoffs/Landings</td>
-                    <td class="table-light text-center">3</td>
-                    <td class="table-secondary"></td>
+                    <td class="table-light border-dark">Night Takeoffs/Landings</td>
+                    <td class="table-light text-center border-dark">3</td>
+                    <td class="table-secondary border-dark"></td>
 
                     {% if mel_nt_landings > 5 %}
-                        <td class="table-success text-center">{{ mel_nt_landings }}</td>
+                        <td class="table-success text-center border-dark">{{ mel_nt_landings }}</td>
                     {% elif mel_nt_landings > 2 %}
-                        <td class="table-warning text-center">{{ mel_nt_landings }}</td>
+                        <td class="table-warning text-center border-dark">{{ mel_nt_landings }}</td>
                     {% else %}
-                        <td class="table-danger text-center">{{ mel_nt_landings }}</td>  
+                        <td class="table-danger text-center border-dark">{{ mel_nt_landings }}</td>  
                     {% endif %}  
 
                     {% if sherpa_nt_landings > 5 %}
-                        <td class="table-success text-center">{{ sherpa_nt_landings }}</td>
+                        <td class="table-success text-center border-dark">{{ sherpa_nt_landings }}</td>
                     {% elif sherpa_nt_landings > 2 %}
-                        <td class="table-warning text-center">{{ sherpa_nt_landings }}</td>
+                        <td class="table-warning text-center border-dark">{{ sherpa_nt_landings }}</td>
                     {% else %}
-                        <td class="table-danger text-center">{{ sherpa_nt_landings }}</td> 
+                        <td class="table-danger text-center border-dark">{{ sherpa_nt_landings }}</td> 
                     {% endif %}
 
                     {% if crit_nt_ldgs == 'sherpa' %}
                         {% if sherpa_nt_landings > 5 %}
-                            <td class="table-success text-center">SD3: {{ last_sherpa_nt_ldg }}</td>
+                            <td class="table-success text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
                         {% elif sherpa_nt_landings > 2 %}
-                            <td class="table-warning text-center">SD3: {{ last_sherpa_nt_ldg }}</td>
+                            <td class="table-warning text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
                         {% else %}
-                            <td class="table-danger text-center">SD3: {{ last_sherpa_nt_ldg }}</td>
+                            <td class="table-danger text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
                         {% endif %}
                     {% elif crit_nt_ldgs == 'mel' %}
                         {% if mel_nt_landings > 5 %}
-                            <td class="table-success text-center">MEL: {{ last_mel_nt_ldg }}</td>
+                            <td class="table-success text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
                         {% elif mel_nt_landings > 2 %}
-                            <td class="table-warning text-center">MEL: {{ last_mel_nt_ldg }}</td>
+                            <td class="table-warning text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
                         {% else %}
-                            <td class="table-danger text-center">MEL: {{ last_mel_nt_ldg }}</td>
+                            <td class="table-danger text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+
+                <tr>
+                    <td class="table-light border-dark">Hours</td>
+                    <td class="table-light text-center border-dark">1</td>
+
+                    {% if sel_90_tt > 5 %}
+                        <td class="table-success text-center border-dark">{{ sel_90_tt }}</td>
+                    {% elif sel_90_tt > 0 %}
+                        <td class="table-warning text-center border-dark">{{ sel_90_tt }}</td>
+                    {% else %}
+                        <td class="table-danger text-center border-dark">{{ sel_90_tt }}</td>
+                    {% endif %}
+
+                    {% if mel_90_tt > 5 %}
+                        <td class="table-success text-center border-dark">{{ mel_90_tt }}</td>
+                    {% elif mel_90_tt > 0 %}
+                        <td class="table-warning text-center border-dark">{{ mel_90_tt }}</td>
+                    {% else %}
+                        <td class="table-danger text-center border-dark">{{ mel_90_tt }}</td>
+                    {% endif %}
+
+                    {% if sherpa_90_tt > 5 %}
+                        <td class="table-success text-center border-dark">{{ sherpa_90_tt }}</td>
+                    {% elif sherpa_90_tt > 0 %}
+                        <td class="table-warning text-center border-dark">{{ sherpa_90_tt }}</td>
+                    {% else %}
+                        <td class="table-danger text-center border-dark">{{ sherpa_90_tt }}</td>
+                    {% endif %}
+
+                    {% if crit_90_tt == 'sherpa' %}
+                        {% if sherpa_90_tt > 5 %}
+                            <td class="table-success text-center border-dark">SD3:&emsp;{{ last_sherpa_flt }}</td>
+                        {% elif sherpa_90_tt > 0 %}
+                            <td class="table-warning text-center border-dark">SD3:&emsp;{{ last_sherpa_flt }}</td>
+                        {% else %}
+                            <td class="table-danger text-center border-dark">SD3:&emsp;{{ last_sherpa_flt }}</td>
+                        {% endif %}
+                    {% elif crit_90_tt == 'mel' %}
+                        {% if mel_90_tt > 5 %}
+                            <td class="table-success text-center border-dark">MEL:&emsp;{{ last_mel_flt }}</td>
+                        {% elif mel_90_tt > 0 %}
+                            <td class="table-warning text-center border-dark">MEL:&emsp;{{ last_mel_flt }}</td>
+                        {% else %}
+                            <td class="table-danger text-center border-dark">MEL:&emsp;{{ last_mel_flt }}</td>
+                        {% endif %}
+                    {% elif crit_90_tt == 'sel' %}
+                        {% if sel_landings > 5 %}
+                            <td class="table-success text-center border-dark">SEL:&emsp;{{ last_sel_flt }}</td>
+                        {% elif sel_landings > 0 %}
+                            <td class="table-warning text-center border-dark">SEL:&emsp;{{ last_sel_flt }}</td>
+                        {% else %}
+                            <td class="table-danger text-center border-dark">SEL:&emsp;{{ last_sel_flt }}</td>
                         {% endif %}
                     {% endif %}
                 </tr>
