@@ -1,8 +1,8 @@
 .a1 {
-<<<<<<< Updated upstream
+
     color: rgb(241, 220, 192);
     background-color: rgb(88, 52, 5);   
-=======
+
     color: rgb(88, 52, 5);
     background-color: rgb(241, 220, 192);   
     border-radius: 10px; 
@@ -18,17 +18,18 @@
 form {
     color: rgb(88, 52, 5);
     background-color: rgb(241, 220, 192);   
->>>>>>> Stashed changes
+
     border-radius: 10px; 
 }
 
 .a2 {
     color: rgb(88, 52, 5);
-<<<<<<< Updated upstream
     background-color: rgb(241, 220, 192); 
 }
-=======
+
+.a2 {
     background-color: rgb(241, 220, 192);
     border: rgb(241, 220, 192);
+}
 
->>>>>>> Stashed changes
+
