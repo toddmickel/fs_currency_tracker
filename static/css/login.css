@@ -2,7 +2,6 @@
 
     color: rgb(241, 220, 192);
     background-color: rgb(88, 52, 5);   
-
     color: rgb(88, 52, 5);
     background-color: rgb(241, 220, 192);   
     border-radius: 10px; 
@@ -17,8 +16,7 @@
 
 form {
     color: rgb(88, 52, 5);
-    background-color: rgb(241, 220, 192);   
-
+    background-color: rgb(241, 220, 192);  
     border-radius: 10px; 
 }
 
