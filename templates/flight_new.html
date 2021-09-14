@@ -14,12 +14,14 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="text-center">New Flight</h1>
+        <h1 class="new_flight">New Flight</h1>
             <form method="POST">
-                {% csrf_token %}                
+                {% csrf_token %}
+                {{ form.as_p }}
+        <input type="submit" value="Update">               
             </form>
-        <table class="table table-bordered">
-        <thead class="thead-light">
+        
+        <thead class="thead">
             <tr class="table-primary">
                 <th scope="col">Date of flight*</th>
                 <th scope="col">Tail number*</th>
@@ -37,11 +39,9 @@
                 <th scope="col">Night time*</th>
                 <th scope="col">Night landings*</th>
             </tr>
-        <tr class="table-success">
-            <td colspan = "16"><b>Remarks:</td>
-        </tr>    
+        
         </thead>        
-        <tr class="table-info"><td colspan = "16"></td></tr>
+        
     </div>
-    <button class="btn btn-info a3" type="submit">Submit</button>
+    
 {% endblock content %}

@@ -1,3 +1,19 @@
 h1.text-center {
-    color: white;
+    color: black;
+    background-color: rgb(238, 238, 229);
+}
+
+.container {
+    text-align: center;
+    background-color: rgb(238, 238, 229);
+}
+
+.th1 {
+    color: black;
+    background-color: rgb(238, 238, 229);
+}
+
+form {
+    color: black;
+    background-color: rgb(238, 238, 229);
 }
