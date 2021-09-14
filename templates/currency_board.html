@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Currency Board{% endblock title %}
+
+{% block content %}
+    <h2>Subordinates</h2>
+    {{ user.first_name }}
+    <ul>
+    {% for object in object_list %}
+        <li>{{ object.pilot }}</li>
+    {% endfor %}
+    </ul>
+
+    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>
+{% endblock content %}

@@ -250,6 +250,16 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
             context['60_day_time'] = 0.0
         return context   
 
+class CurrencyBoardView(LoginRequiredMixin, ListView):
+    template_name = 'currency_board.html'
+    model = FlightDetail
+    today = date.today()
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(pilot__user_supervisor=self.request.user.id)
+
+
 def get_crit_ldgs(
     last_sel, sel_ldg, 
     last_mel, mel_ldg, 
