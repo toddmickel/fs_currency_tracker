@@ -13,12 +13,35 @@
     {% endblock %}
 
 {% block content %}
-    <div class="container a2">
-    <h1 class="text-center">New Flight</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <button class="btn btn-info a3" type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1 class="text-center">New Flight</h1>
+            <form method="POST">
+                {% csrf_token %}                
+            </form>
+        <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr class="table-primary">
+                <th scope="col">Date of flight*</th>
+                <th scope="col">Tail number*</th>
+                <th scope="col">Depart ICAO*</th>
+                <th scope="col">Arrival ICAO*</th>
+                <th scope="col">Msn type*</th>
+                <th scope="col">Pic type*</th>
+                <th scope="col">Sic time*</th>
+                <th scope="col">Instructor time*</th>
+                <th scope="col">Act instrument time*</th>
+                <th scope="col">Sim instrument time*</th>
+                <th scope="col">Instument appchs*</th>
+                <th scope="col">Holds*</th>
+                <th scope="col">Day landiings*</th>
+                <th scope="col">Night time*</th>
+                <th scope="col">Night landings*</th>
+            </tr>
+        <tr class="table-success">
+            <td colspan = "16"><b>Remarks:</td>
+        </tr>    
+        </thead>        
+        <tr class="table-info"><td colspan = "16"></td></tr>
     </div>
+    <button class="btn btn-info a3" type="submit">Submit</button>
 {% endblock content %}

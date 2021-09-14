@@ -29,13 +29,16 @@ body {
     color:white;
 }
 
+.pa_1:focus {
+    color: gold;
+}
+
 .pa_2 {
-    background-color: rgb(241, 220, 192);
+    background-color:white;
 }
 
 .pa_2:hover {
-    color: rgb(241, 220, 192);
-    background-color: rgb(88, 52, 5);
+    color: black;
 }
 
 header {
@@ -66,4 +69,53 @@ header {
 
 .pw_1:hover {
     color: white;
+}
+
+.pw_1:focus {
+    color: gold;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px)
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) 
+
+/* If the screen size is 600px wide or less, hide the element */
+@media only screen and (max-width: 600px) {
+    div.example {
+    display: none;
+    }
+}
+
+/* If the screen size is 601px or more, set the font-size of <div> to 80px */
+@media only screen and (min-width: 601px) {
+    div.example {
+    font-size: 80px;
+    }
+}
+  
+  /* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 600px) {
+    div.example {
+    font-size: 30px;
+    }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {  
+    * {
+    /* Very short durations means JavaScript that relies on events still works */
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    }
 }
