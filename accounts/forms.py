@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.forms.fields import DateField
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
@@ -19,3 +20,4 @@ class ProfileForm(forms.ModelForm):
             'commercial_rating', 'medical_class', 'date_of_medical',
             'is_captain', 'smokejumper_msn_eval_date', 'equipment_eval_date',
             ]
+
