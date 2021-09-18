@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Flight Info{% endblock title %}
+
+{% block content %}
+    <div class="container py-1">
+    <h1><i style='font-size:24px' class='fas'>&#xf5a1;</i> Edit Flight Information <i style='font-size:24px' class='fas'>&#xf5a1;</i></h1>
+    
+    <form method = "POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="fas fa-save fa-5x s1" type="submit"></button> 
+    </form>
+    </div>
+{% endblock content %}

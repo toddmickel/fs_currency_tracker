@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Flight Detail{% endblock title %}
+
+{% block additional_styles %}
+    <style>
+        body {
+            background-image: url(/static/img/montana.jpg);
+        }
+    </style>
+    {% endblock %}
+
+{% block content %}
+<div class="container py-1">
+<h2 class="text-center">{{ user.first_name }}'s Flight History</h2>
+<table class="table">
+    <thead style="position: sticky;top: 0" class="thead-light">
+        <tr class="table-primary">
+            <th scope="col">Date</th>
+            <th scope="col">Tail #</th>
+            <th scope="col">Dep</th>
+            <th scope="col">Arr</th>
+            <th scope="col">Mission</th>
+            <th scope="col">PIC</th>
+            <th scope="col">SIC</th>
+            <th scope="col">IP</th>
+            <th scope="col">Total</th>
+            <th scope="col">Act Intsm</th>
+            <th scope="col">Sim Instm</th>
+            <th scope="col">Instm App</th>
+            <th scope="col">Holds</th>
+            <th scope="col">Day Ldg</th>
+            <th scope="col">Nt Time</th>
+            <th scope="col">Nt Ldg</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in object_list %}
+        {% if flight.pilot == user %}
+        <tr class="table-success border border-secondary">
+            <th scope="row" class="border border-secondary">{{ flight.date_of_flight|date:"n/j/y" }}</th>
+            <td class="border border-secondary">{{ flight.tail_number.tail_number }}<br>{{ flight.tail_number.aircraft_type }}</td>
+            <td class="border border-secondary">{{ flight.depart_ICAO }}</td>
+            <td class="border border-secondary">{{ flight.arrival_ICAO }}</td>
+            <td class="border border-secondary">{{ flight.msn_type }}</td>
+            <td class="border border-secondary">{{ flight.pic_time }}</td>
+            <td class="border border-secondary">{{ flight.sic_time }}</td>
+            <td class="border border-secondary">{{ flight.instructor_time }}</td>
+            <td class="border border-secondary">{{ flight.total_time }}</td>
+            <td class="border border-secondary">{{ flight.act_instrument_time }}</td>
+            <td class="border border-secondary">{{ flight.sim_instrument_time }}</td>
+            <td class="border border-secondary">{{ flight.instrument_appchs }}</td>
+            <td class="border border-secondary">{{ flight.holds }}</td>
+            <td class="border border-secondary">{{ flight.day_landings }}</td>
+            <td class="border border-secondary">{{ flight.night_time }}</td>
+            <td class="border border-secondary">{{ flight.night_landings }}</td>
+            <td class="border border-secondary">
+                <a class="fas fa-edit" href="{% url 'flight_edit' flight.id  %}"></a><br>
+                <a class="fas fa-trash-alt" href="{% url 'flight_delete' flight.id %}"></i></td>
+        </tr>
+        <tr class="table-success border border-secondary">
+            <td colspan = "17" class="text-start"><b>Remarks:</b>  {{ flight.remarks }}</td>
+        </tr>
+        <tr class="table-info border border-secondary"><td colspan = "17"></td></tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock content %}

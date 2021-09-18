@@ -17,8 +17,8 @@
         <h1 class="new_flight">New Flight</h1>
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}            
-            </form>        
-            <i class="fas fa-save fa-5x s1"></i> 
+                {{ form.as_p }}                   
+                <button class="fas fa-save fa-5x s1" type="submit"></button> 
+            </form> 
     </div> 
 {% endblock content %}

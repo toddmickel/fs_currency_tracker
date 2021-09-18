@@ -11,7 +11,7 @@ from .views import (
 urlpatterns = [
     path('new/', FlightCreateView.as_view(), name='flight_new'),
     path('<int:pk>/', FlightDetailView.as_view(), name='flight_detail'),
-    path('<int:pk>/edit/', FlightUpdateView.as_view(), name='flight_new_edit'),
-    path('<int:pk>/delete/', FlightDeleteView.as_view(), name='flight_new_delete'),
+    path('<int:pk>/edit/', FlightUpdateView.as_view(), name='flight_edit'),
+    path('<int:pk>/delete/', FlightDeleteView.as_view(), name='flight_delete'),
     path('view/', FlightListView.as_view(), name='flight_list')
 ]

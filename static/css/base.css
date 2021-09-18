@@ -1,9 +1,30 @@
+:root {
+    --background: #eeece5;
 
+    --brown_primary: #2e1e12;
+    --brown_darker: #261f1b;
+    --brown_darkest: #212121;
+
+    --green_primary: #076727;
+    --green_darkest: #073d11;
+    --green_dark: #0a531b;
+    
+    --blue: #9bdaf1;
+    --light_blue: #e1f3f8;
+
+    --red_secondary: #e31c3d;
+    --red_darkest: #981b1e;
+    --red_dark: #cd2026;
+    --red_light: #e59393;
+    --red_lightest: #f9dede;
+
+    --fs_gold: #ffc425;
+}
 
 /* base */
 body {
     font-family: 'Playfair Display', serif;
-    background: rgb(238, 238, 229) url("/static/img/sf_logo4.jpg") no-repeat;
+    background: var(--background) url("/static/img/sf_logo4.jpg") no-repeat;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -20,7 +41,7 @@ header {
 
 h1.text-center {
     color: black;
-    background-color: rgb(238, 238, 229);
+    background-color: var(--background);
 }
 
 h1 {
@@ -34,27 +55,40 @@ p {
     /* login form */
 form {
     color: black;
-    background-color: rgb(238, 238, 229);  
+    background-color: var(--background);  
     border-radius: 10px; 
 }
 
+.fa-edit, .fa-trash-alt {
+    color: var(--green_dark);
+    text-decoration: none
+}
+
+.fa-edit:hover {
+    color: var(--green_darkest)
+}
+
+.fa-trash-alt:hover {
+    color: var(--red_dark)
+}
+
 .navbar {    
-    background-color: green;
-    border-bottom: 2px solid green;
+    background-color: var(--green_primary);
+    border-bottom: 2px solid var(--green_primary);
     margin-bottom: 2rem;
     display: flex;
 }
 
 .navbar-brand {
-    color:gold;
+    color:var(--fs_gold);
 }
 
 .navbar-brand:hover {
-    color:gold;
+    color:var(--fs_gold);
 }
 
 .pa_1 {
-    color:gold;
+    color:var(--fs_gold);
 }
 
 .pa_1:hover {
@@ -62,11 +96,11 @@ form {
 }
 
 .pa_1:focus {
-    color: gold;
+    color: var(--fs_gold);
 }
 
 .pa_2 {
-    background-color:rgb(238, 238, 229);
+    background-color:var(--background);
 }
 
 .pa_2:hover {
@@ -82,7 +116,7 @@ form {
 
     /* profile */
 .pw_1 {
-    color: gold;
+    color: var(--fs_gold);
     margin-right: 8rem;
 }
 
@@ -91,38 +125,38 @@ form {
 }
 
 .pw_1:focus {
-    color: gold;
+    color: var(--fs_gold);
 }
 
 /* flight_new (table) */
 .container {
     text-align: center;
-    background-color: rgb(238, 238, 229);
+    background-color: var(--background);
 }
 
 .th1 {
     color: black;
-    background-color: rgb(238, 238, 229);
+    background-color: var(--background);
 }
 
 .s1 {
     cursor: pointer;
     padding: 5px;
-    background: rgb(238, 238, 229);
+    background: var(--background);
     color: black;    
 }
 
 .edit1 {
     cursor: pointer;
     padding: 5px;
-    background: rgb(238, 238, 229);
+    background: var(--background);
     color: black; 
 }
 
 .delete1 {
     cursor: pointer;
     padding: 5px;
-    background: rgb(238, 238, 229);
+    background: var(--background);
     color:  red; 
 }
 
@@ -130,7 +164,7 @@ form {
     /* table div container */
 .a1 {
     color: black;
-    background-color: rgb(238, 238, 229);   
+    background-color: var(--background);   
     border-radius: 10px; 
     opacity: 0.9;
 }
@@ -138,8 +172,8 @@ form {
     /* submitt btn */
 .a2 {
     color: black;
-    background-color: rgb(238, 238, 229); 
-    border: rgb(238, 238, 229);
+    background-color: var(--background); 
+    border: var(--background);
     *opacity: 0.9;
 }
 
@@ -156,13 +190,37 @@ form {
 /* profile (account) */
 .prof2 {
     color: black;
-    background-color: rgb(238, 238, 229);
+    background-color: var(--background);
 }
 
 .profbn {
     color: white;
 }
 
+.btn {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+.cancel_btn {
+    background-color: var(--brown_primary);
+    color: white;
+}
+
+.cancel_btn:hover {
+    background-color: var(--brown_darkest);
+    color: white;
+}
+
+.delete_btn {
+    background-color: var(--red_dark);
+    color: white;
+}
+
+.delete_btn:hover {
+    background-color: var(--red_darkest);
+    color: white;
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 768px) {
@@ -193,9 +251,9 @@ form {
         margin-left: auto;
         margin-right: auto;
     }    
-}
+} 
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* Medium devices (landscape tablets, 768px and up)
 @media only screen and (min-width: 768px) {
     body {
         width: 70%;

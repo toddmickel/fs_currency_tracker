@@ -41,11 +41,11 @@ class FlightDetailView(LoginRequiredMixin, DetailView):
 
 class FlightListView(LoginRequiredMixin, ListView):
     model = FlightDetail
-    template_name = "flight_detail.html"
+    template_name = "view_flights.html"
 
 class FlightUpdateView(LoginRequiredMixin, UpdateView):
     model = FlightDetail
-    template_name = "flight_new_edit.html"
+    template_name = "flight_edit.html"
     fields = [
         "date_of_flight",
         "tail_number",
@@ -65,9 +65,13 @@ class FlightUpdateView(LoginRequiredMixin, UpdateView):
         "remarks"
         ]
 
+    def form_valid(self, form):
+        form.instance.total_time = form.instance.pic_time +  form.instance.sic_time + form.instance.instructor_time
+        return super().form_valid(form)
+
 class FlightDeleteView(LoginRequiredMixin, DeleteView):
     model = FlightDetail
-    template_name = "flight_new_delete.html"
+    template_name = "flight_delete.html"
     success_url = reverse_lazy('flight_list')
 
     

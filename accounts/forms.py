@@ -3,8 +3,10 @@ from django.contrib.auth.forms import (
     UserChangeForm, 
     UserCreationForm,
     )
+from functools import partial
 from .models import CustomUser
 
+DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
@@ -22,4 +24,3 @@ class ProfileForm(forms.ModelForm):
             'commercial_rating', 'medical_class', 'date_of_medical',
             'is_captain', 'smokejumper_msn_eval_date', 'equipment_eval_date',
             ]
-

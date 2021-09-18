@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Flight{% endblock title %}
+
+{% block content %}
+    <div class="container py-1">
+        <h2>Are you sure you want to delete this flight?</h2>
+        <table class="table table-bordered t1">
+            <thead class="thead-light">
+                <tr class="table-primary">
+                    <th scope="col">Date</th>
+                    <th scope="col">Tail #</th>
+                    <th scope="col">Dep</th>
+                    <th scope="col">Arr</th>
+                    <th scope="col">Mission</th>
+                    <th scope="col">PIC</th>
+                    <th scope="col">SIC</th>
+                    <th scope="col">IP</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Act Intsm</th>
+                    <th scope="col">Sim Instm</th>
+                    <th scope="col">Instm App</th>
+                    <th scope="col">Holds</th>
+                    <th scope="col">Day Ldg</th>
+                    <th scope="col">Nt Time</th>
+                    <th scope="col">Nt Ldg</th>
+                </tr>
+            </thead>
+        <tbody>
+                <tr class="table-success border border-secondary">
+                    <th scope="row">{{ flightdetail.date_of_flight|date:"n/j/y" }}</th>
+                    <td>{{ flightdetail.tail_number }}</td>
+                    <td>{{ flightdetail.depart_ICAO }}</td>
+                    <td>{{ flightdetail.arrival_ICAO }}</td>
+                    <td>{{ flightdetail.msn_type }}</td>
+                    <td>{{ flightdetail.pic_time }}</td>
+                    <td>{{ flightdetail.sic_time }}</td>
+                    <td>{{ flightdetail.instructor_time }}</td>
+                    <td>{{ flightdetail.total_time }}</td>
+                    <td>{{ flightdetail.act_instrument_time }}</td>
+                    <td>{{ flightdetail.sim_instrument_time }}</td>
+                    <td>{{ flightdetail.instrument_appchs }}</td>
+                    <td>{{ flightdetail.holds }}</td>
+                    <td>{{ flightdetail.day_landings }}</td>
+                    <td>{{ flightdetail.night_time }}</td>
+                    <td>{{ flightdetail.night_landings }}</td>
+                </tr>
+                <tr class="table-success border border-secondary">
+                    <td colspan = "16" class="text-start"><b>Remarks:</b>  {{ flight.remarks }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn delete_btn">Delete</button> 
+            <a class="btn cancel_btn" href="{{ view.get_success_url }}">Cancel</a>
+        </form>
+    </div>
+{% endblock content %}
