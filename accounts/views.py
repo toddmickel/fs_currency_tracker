@@ -6,6 +6,7 @@ from django.views import generic
 from .models import CustomUser
 
 
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
@@ -19,3 +20,6 @@ class ProfileView(LoginRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+
+

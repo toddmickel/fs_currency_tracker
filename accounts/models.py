@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.urls import reverse
 
+
 class CustomUser(AbstractUser):
     REGION_CHOICES = [
         ('1', '1 - Northern'),
@@ -85,3 +86,4 @@ class AcftQual(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.pilot, self.acft)
+

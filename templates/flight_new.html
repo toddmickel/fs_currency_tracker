@@ -17,31 +17,8 @@
         <h1 class="new_flight">New Flight</h1>
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-        <input type="submit" value="Update">               
-            </form>
-        
-        <thead class="thead">
-            <tr class="table-primary">
-                <th scope="col">Date of flight*</th>
-                <th scope="col">Tail number*</th>
-                <th scope="col">Depart ICAO*</th>
-                <th scope="col">Arrival ICAO*</th>
-                <th scope="col">Msn type*</th>
-                <th scope="col">Pic type*</th>
-                <th scope="col">Sic time*</th>
-                <th scope="col">Instructor time*</th>
-                <th scope="col">Act instrument time*</th>
-                <th scope="col">Sim instrument time*</th>
-                <th scope="col">Instument appchs*</th>
-                <th scope="col">Holds*</th>
-                <th scope="col">Day landiings*</th>
-                <th scope="col">Night time*</th>
-                <th scope="col">Night landings*</th>
-            </tr>
-        
-        </thead>        
-        
-    </div>
-    
+                {{ form.as_p }}            
+            </form>        
+            <i class="fas fa-save fa-5x s1"></i> 
+    </div> 
 {% endblock content %}

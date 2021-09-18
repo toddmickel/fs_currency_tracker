@@ -7,14 +7,14 @@ from django.urls import reverse
 class FlightDetail(models.Model):
     pilot = models.ForeignKey(
         'accounts.CustomUser', 
-        on_delete=models.CASCADE, 
+        on_delete = models.CASCADE, 
         blank=False, 
         null=False,
         )
     date_of_flight = models.DateField(null=False, blank=False)
     tail_number = models.ForeignKey(
         'Aircraft', 
-        on_delete=models.PROTECT, 
+        on_delete = models.PROTECT, 
         blank=False, 
         null=False,
         )

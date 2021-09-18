@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     'crispy_forms',
     'whitenoise.runserver_nostatic',
-    'dateutil',
-
+    
 
     # locally developed apps
     'accounts',
