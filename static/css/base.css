@@ -105,6 +105,27 @@ form {
     background-color: rgb(238, 238, 229);
 }
 
+.s1 {
+    cursor: pointer;
+    padding: 5px;
+    background: rgb(238, 238, 229);
+    color: black;    
+}
+
+.edit1 {
+    cursor: pointer;
+    padding: 5px;
+    background: rgb(238, 238, 229);
+    color: black; 
+}
+
+.delete1 {
+    cursor: pointer;
+    padding: 5px;
+    background: rgb(238, 238, 229);
+    color:  red; 
+}
+
 /* login */
     /* table div container */
 .a1 {

@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.forms.fields import DateField
+from django.contrib.auth.forms import (
+    UserChangeForm, 
+    UserCreationForm,
+    )
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):

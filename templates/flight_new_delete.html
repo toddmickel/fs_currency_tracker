@@ -3,10 +3,11 @@
 {% block title %}Delete New Flight Info{% endblock title %}
 
 {% block content %}
-    <h1>Delete New Flight Info</h1>
-    <form action="" method="POST">
+    <h1>Delete</h1>
+    <i class='far fa-trash-alt' style='font-size:24px;color:red'></i>
+    <form method="POST">
         {% csrf_token %}
-        <p>Are you sure you want to delete your new flight info"?</p>
-        <input type="submit" value="Confirm">
+        <p>Are you sure you want to delete? "{{ Flight_new_edit}}"?</p>
+        <i class="far fa-trash-alt fa-5x delete1"></i>
     </form>
 {% endblock content %}

@@ -4,9 +4,10 @@
 
 {% block content %}
     <h1>Edit new flight info</h1>
-    <form action="" method="POST">
+    <i style='font-size:24px' class='fas'>&#xf5a1;</i>
+    <form method = "POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Update">
+        <i class="fas fa-pencil-alt fa-5x edit1"></i>
     </form>
 {% endblock content %}

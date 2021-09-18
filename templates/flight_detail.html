@@ -6,10 +6,11 @@
 {% block title %}Flight Detail{% endblock title %}
 
 {% block content %}
-    <div class="col-md-8 offset-md-4" style="max-width: 50%;">
+    <div class="container">
         <h2>{{ flightdetail.pilot.last_name }}</h2>
         <form method="POST">
-            {{ form | crispy }}
+            {% csrf_token %}
+            {{ form.as_table}}
         <table class="table table-bordered t1">
             <thead class="thead-light">
                 <tr>
@@ -54,6 +55,7 @@
                 </tr>
             </tbody>
         </table>
+        <button class="btn btn-success ml-2" type="submit">Save</button>  
         </form>
     </div>
 {% endblock content %}
