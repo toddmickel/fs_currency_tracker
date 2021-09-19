@@ -7,18 +7,67 @@
 {% block additional_styles %}
     <style>
         body {
-            background-image: url(/static/img/oregon.jpeg);
+            background: var(--background);
         }
     </style>
     {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="new_flight">New Flight</h1>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}                   
-                <button class="fas fa-save fa-5x s1" type="submit"></button> 
-            </form> 
-    </div> 
+<form method = "POST">
+    {% csrf_token %}
+<div class="new-flt-page">
+    <h2>Enter A New Flight</h2>
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+        </div>
+    {% endfor %}
+    <table class="table table-bordered t1" style="width:100%;">
+        <thead class="thead-light">
+            <tr class="table-primary border border-secondary">
+                <th scope="col" class="text-center new-flt-hd">Date</th>
+                <th scope="col" class="text-center new-flt-hd">Tail #</th>
+                <th scope="col" class="text-center new-flt-hd">Dep</th>
+                <th scope="col" class="text-center new-flt-hd">Arr</th>
+                <th scope="col" class="text-center new-flt-hd">Mission</th>
+                <th scope="col" class="text-center new-flt-hd">PIC</th>
+                <th scope="col" class="text-center new-flt-hd">SIC</th>
+                <th scope="col" class="text-center new-flt-hd">IP</th>
+                <th scope="col" class="text-center new-flt-hd">Act<br>Intsm</th>
+                <th scope="col" class="text-center new-flt-hd">Sim<br>Instm</th>
+                <th scope="col" class="text-center new-flt-hd">Instm<br>App</th>
+                <th scope="col" class="text-center new-flt-hd">Holds</th>
+                <th scope="col" class="text-center new-flt-hd">Day<br>Ldg</th>
+                <th scope="col" class="text-center new-flt-hd">Nt<br>Time</th>
+                <th scope="col" class="text-center new-flt-hd">Nt<br>Ldg</th>
+            </tr>
+        </thead>
+    <tbody>
+            <tr class="table-success border border-secondary">
+                <th scope="row">{{ form.date_of_flight }}</th>
+                <td>{{ form.tail_number }}</td>
+                <td>{{ form.depart_ICAO }}</td>
+                <td>{{ form.arrival_ICAO }}</td>
+                <td>{{ form.msn_type }}</td>
+                <td>{{ form.pic_time }}</td>
+                <td>{{ form.sic_time }}</td>
+                <td>{{ form.instructor_time }}</td>
+                <td>{{ form.act_instrument_time }}</td>
+                <td>{{ form.sim_instrument_time }}</td>
+                <td>{{ form.instrument_appchs }}</td>
+                <td>{{ form.holds }}</td>
+                <td>{{ form.day_landings }}</td>
+                <td>{{ form.night_time }}</td>
+                <td>{{ form.night_landings }}</td>
+            </tr>
+            <tr class="table-success border border-secondary">
+                <td colspan = "16" class="text-start"><b>Remarks:</b>  {{ form.remarks }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <button type="submit" class="btn submit_btn">Submit</button> 
+        <a class="btn cancel_btn" href="{{ view.get_success_url }}">Cancel</a>
+    </form>
+</div>
 {% endblock content %}
