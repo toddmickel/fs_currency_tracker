@@ -212,6 +212,11 @@ form {
     color: white;
 }
 
+.submit_btn {
+    background-color: var(--green_primary);
+    color: white;
+}
+
 .delete_btn {
     background-color: var(--red_dark);
     color: white;
@@ -220,6 +225,93 @@ form {
 .delete_btn:hover {
     background-color: var(--red_darkest);
     color: white;
+}
+
+.new-flt-page {
+    padding: 1rem;
+}
+
+.new-flt-hd {
+    font-size: .9rem;
+}
+
+#id_date_of_flight {
+    width: 7.8rem;
+    font-size: .8rem;
+}
+
+#id_tail_number {
+    width: 4rem;
+    font-size: .8rem;
+}
+
+#id_depart_ICAO {
+    font-size: .8rem;
+}
+
+#id_arrival_ICAO {
+    font-size: .8rem;
+}
+
+#id_msn_type {
+    font-size: .8rem;
+    width: 7rem;
+}
+
+#id_pic_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_sic_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_instructor_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_act_instrument_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_sim_instrument_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_instrument_appchs {
+    font-size: .8rem;
+    width: 1.9rem;
+}
+
+#id_holds {
+    font-size: .8rem;
+    width: 1.9rem;
+}
+
+#id_day_landings {
+    font-size: .8rem;
+    width: 1.9rem;
+}
+
+#id_night_time {
+    font-size: .8rem;
+    width: 2.6rem;
+}
+
+#id_night_landings {
+    font-size: .8rem;
+    width: 1.9rem;
+}
+
+#id_remarks {
+    font-size: .9rem;
+    height: 4rem;
+    width: 100%;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
