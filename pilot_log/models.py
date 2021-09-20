@@ -18,8 +18,8 @@ class FlightDetail(models.Model):
         blank=False, 
         null=False,
         )
-    depart_ICAO = models.CharField(max_length=4, null=False, blank=False)
-    arrival_ICAO = models.CharField(max_length=4, null=False, blank=False)
+    depart_ICAO = models.CharField(max_length=4, null=False, blank=False, default="KMSO")
+    arrival_ICAO = models.CharField(max_length=4, null=False, blank=False, default="KMSO")
     msn_type = models.CharField(
         max_length=20,
         choices=settings.MISSION_CHOICES,

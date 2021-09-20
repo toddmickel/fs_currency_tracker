@@ -9,7 +9,10 @@
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="btn btn-success ml-2 profbn" type="submit">Update</button>
+            <div class="d-flex justify-content-evenly py-3">
+                <button class="btn submit_btn ml-2 profbn" type="submit">Update</button>
+                <input class="btn cancel_btn" type="button" value="Go Back" onclick="history.back()">
+            </div>
         </form>
     </div>
 {% endblock content %}
