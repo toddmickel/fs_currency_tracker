@@ -25,7 +25,7 @@
     </head>
     <body>   
         <nav class="navbar navbar-expand-lg navbar-nb2">
-            <div class="container-fluid">
+                <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">Forest Service Flight Log</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {% if user.is_authenticated %}
@@ -48,7 +48,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="SupDropdown">
                                 <li><a class="dropdown-item pa_2" href="#">Create User</a></li>
-                                <li><a class="dropdown-item pa_2" href="{% url 'currency_board' %}">View Currency Board</a></li>
+                                <li><a class="dropdown-item pa_2" href="{% url 'currency_board' %}">List Subordinates</a></li>
                             </ul>
                         </li>
                         {% endif %}
