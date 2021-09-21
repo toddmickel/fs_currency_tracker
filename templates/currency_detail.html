@@ -5,8 +5,12 @@
 
 {% block content %}
     <div class="container py-1">
-        <h2 class="text-center">{{ user.first_name }} {{ user.last_name }}</h2>
-        <h5 class="text-center">Last Login: {{ user.last_login }}</h5>
+        {% if object_list.0 == NULL %}
+            <h3>No Flight Records Found</h3>
+            <h4>Select Pilot Actions - Create Flight</h4>
+        {% else %}
+        <h2 class="text-center">{{ object_list.0.pilot.first_name }} {{ object_list.0.pilot.last_name }}</h2>
+        <h5 class="text-center">Last Login: {{ object_list.0.pilot.last_login }}</h5>
         <table class="table table-bordered border-dark">
             <thead>
                 <tr>
@@ -153,35 +157,27 @@
                     <td class="table-light text-center border-dark">3</td>
                     <td class="table-secondary border-dark"></td>
 
-                    {% if mel_nt_landings > 5 %}
+                    {% if mel_nt_landings > 2 %}
                         <td class="table-success text-center border-dark">{{ mel_nt_landings }}</td>
-                    {% elif mel_nt_landings > 2 %}
-                        <td class="table-warning text-center border-dark">{{ mel_nt_landings }}</td>
                     {% else %}
                         <td class="table-danger text-center border-dark">{{ mel_nt_landings }}</td>  
                     {% endif %}  
 
-                    {% if sherpa_nt_landings > 5 %}
+                    {% if sherpa_nt_landings > 2 %}
                         <td class="table-success text-center border-dark">{{ sherpa_nt_landings }}</td>
-                    {% elif sherpa_nt_landings > 2 %}
-                        <td class="table-warning text-center border-dark">{{ sherpa_nt_landings }}</td>
                     {% else %}
                         <td class="table-danger text-center border-dark">{{ sherpa_nt_landings }}</td> 
                     {% endif %}
 
                     {% if crit_nt_ldgs == 'sherpa' %}
-                        {% if sherpa_nt_landings > 5 %}
+                        {% if sherpa_nt_landings > 2 %}
                             <td class="table-success text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
-                        {% elif sherpa_nt_landings > 2 %}
-                            <td class="table-warning text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
                         {% else %}
                             <td class="table-danger text-center border-dark">SD3:&emsp;{{ last_sherpa_nt_ldg }}</td>
                         {% endif %}
                     {% elif crit_nt_ldgs == 'mel' %}
-                        {% if mel_nt_landings > 5 %}
+                        {% if mel_nt_landings > 2 %}
                             <td class="table-success text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
-                        {% elif mel_nt_landings > 2 %}
-                            <td class="table-warning text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
                         {% else %}
                             <td class="table-danger text-center border-dark">MEL:&emsp;{{ last_mel_nt_ldg }}</td>
                         {% endif %}
@@ -244,5 +240,11 @@
                 </tr>
             </tbody>
         </table>
+        {% if object_list.0.pilot.id != user.id %}
+        <div class="d-flex justify-content-evenly py-3">
+            <a class="btn cancel_btn" href="{% url 'currency_board' %}">Go Back</a>
+        </div>
+        {% endif %}
+        {% endif %}
     </div>
 {% endblock content %}

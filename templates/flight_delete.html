@@ -53,8 +53,10 @@
 
         <form method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn delete_btn">Delete</button> 
-            <a class="btn cancel_btn" href="{{ view.get_success_url }}">Cancel</a>
+            <div class="d-flex justify-content-evenly py-3">
+                <button type="submit" class="btn delete_btn">Delete</button> 
+                <a class="btn cancel_btn" href="{{ view.get_success_url }}">Cancel</a>
+            </div>
         </form>
     </div>
 {% endblock content %}

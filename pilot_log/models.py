@@ -29,7 +29,7 @@ class FlightDetail(models.Model):
     pic_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     sic_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     instructor_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
-    total_time = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    total_time = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
     act_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     sim_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     instrument_appchs = models.IntegerField(default=0)
