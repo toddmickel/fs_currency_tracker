@@ -18,7 +18,11 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(pilot=self.request.user.id)
+        try: self.kwargs['uid']
+        except KeyError:
+            return qs.filter(pilot=self.request.user.id)
+        else:
+            return qs.filter(pilot=self.kwargs['uid'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

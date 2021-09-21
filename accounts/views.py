@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from .forms import ProfileForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -15,10 +16,11 @@ class SignUpView(generic.CreateView):
 class ProfileView(LoginRequiredMixin, generic.edit.UpdateView):
     model = CustomUser
     form_class = ProfileForm
-    success_url = reverse_lazy('home')
-    template_name = 'profile.html'
+    template_name = 'profile2.html'
 
     def form_valid(self, form):
+        self.object.save()
+        messages.success(self.request, 'Profile Successfully Updated')
         return super().form_valid(form)
 
 

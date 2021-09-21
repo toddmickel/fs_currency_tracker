@@ -63,6 +63,11 @@ form {
     border-radius: 10px; 
 }
 
+.prof-form {
+    margin: 3rem 5rem;
+    padding-bottom: 2rem;
+}
+
 .fas, .far {
     color: var(--green_dark);
     text-decoration: none
