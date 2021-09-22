@@ -16,7 +16,7 @@ class SignUpView(generic.CreateView):
 class ProfileView(LoginRequiredMixin, generic.edit.UpdateView):
     model = CustomUser
     form_class = ProfileForm
-    template_name = 'profile2.html'
+    template_name = 'profile.html'
 
     def form_valid(self, form):
         self.object.save()
