@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% Load_crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %}Sign Up{% endblock title %}
 
 {% block content %}
+    {% if user.is_supervisor %}
+
     <div class="col-md-8 offset-md-4" style="max-width: 50%;">
         <h2>Sign Up</h2>
         <form method="POST">
@@ -12,4 +14,5 @@
             <button class="btn btn-success ml-2" type="submit">Sign Up</button>
         </form>
     </div>
+    {% endif %}
 {% endblock content %}
