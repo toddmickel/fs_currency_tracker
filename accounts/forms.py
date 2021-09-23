@@ -16,7 +16,7 @@ class ProfileForm(forms.ModelForm):
         model = CustomUser
         fields = [
             'id', 'first_name', 'last_name', 'email',
-            'region', 'user_supervisor', 'base',
+            'region', 'user_supervisor', 'base', 'is_active',
             'office_phone', 'cell_phone', 'date_of_hire',
             'pilot_cert_number', 'atp', 'cfi', 'cfii', 'mei',
             'commercial_rating', 'medical_class', 'date_of_medical',
