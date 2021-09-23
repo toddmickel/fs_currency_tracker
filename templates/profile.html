@@ -6,6 +6,19 @@
 
 {% block content %}
 
+{% if not user.is_supervisor and user.id != object.id %}
+<div class="container border border-success rounded">
+    <h3>You are not authorized to view or edit any profile other than your own.</h3>
+</div>
+{% elif object.user_supervisor.id != user.id and user.id != object.id %}
+<div class="container border border-success rounded">
+    <h3>You are not authorized to view or edit this user's profile.</h3>
+    <p>You are not listed as this user's supervisor.  If this is in error, please
+        ask this user to edit their profile and designate you as their supervisor.
+    </p>
+</div>
+{% else %}
+
 {% if messages %}
 <div class="container message-container border border-success rounded bg-success">
     {% for message in messages %}
@@ -69,7 +82,12 @@
             {{ form.date_of_hire }}
             {{ form.date_of_hire.errors }}
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            {% if user.is_supervisor and user.id != object.id %}
+            <label for="id_is_active" class="form-label">Active?</label><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{% render_field form.is_active class="form-check-input" %}
+            {% endif %}
+        </div>
 
         <div class="col-md-1"></div>
         <div class="col-md-10"><hr></div>        
@@ -164,5 +182,5 @@
         </div>
         {% endif %}
     </form>
-
+    {% endif %}
 {% endblock content %}
