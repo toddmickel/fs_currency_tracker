@@ -52,6 +52,14 @@ h1 {
     color: black;
 }
 
+.su1 {
+    background-color: var(--background); 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    margin-bottom: -6px;
+}
+
 p {
     color: black;
 }
