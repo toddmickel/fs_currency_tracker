@@ -39,6 +39,10 @@ header {
     display: flex;
 }
 
+a {
+    text-decoration: none;
+}
+
 h1.text-center {
     color: black;
     background-color: var(--background);
@@ -59,12 +63,17 @@ form {
     border-radius: 10px; 
 }
 
-.fa-edit, .fa-trash-alt {
+.prof-form {
+    margin: 3rem 5rem;
+    padding-bottom: 2rem;
+}
+
+.fas, .far {
     color: var(--green_dark);
     text-decoration: none
 }
 
-.fa-edit:hover {
+.fas:hover, .far:hover {
     color: var(--green_darkest)
 }
 
@@ -217,6 +226,10 @@ form {
     color: white;
 }
 
+.submit_btn:hover {
+    background-color: var(--green_dark);
+    color: white;
+}
 .delete_btn {
     background-color: var(--red_dark);
     color: white;

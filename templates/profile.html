@@ -1,15 +1,186 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
 
 {% block title %}User Profile{% endblock title %}
 
 {% block content %}
-    <div class="col-md-8 offset-md-3 prof2" style="max-width: 50%;">
-        <h2>Profile for user {{ user.get_username }}</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-success ml-2 profbn" type="submit">Update</button>
-        </form>
-    </div>
+
+{% if not user.is_supervisor and user.id != object.id %}
+<div class="container border border-success rounded">
+    <h3>You are not authorized to view or edit any profile other than your own.</h3>
+</div>
+{% elif object.user_supervisor.id != user.id and user.id != object.id %}
+<div class="container border border-success rounded">
+    <h3>You are not authorized to view or edit this user's profile.</h3>
+    <p>You are not listed as this user's supervisor.  If this is in error, please
+        ask this user to edit their profile and designate you as their supervisor.
+    </p>
+</div>
+{% else %}
+
+{% if messages %}
+<div class="container message-container border border-success rounded bg-success">
+    {% for message in messages %}
+    <h1 class="display-4 text-white {% if message.tags %}{{ message.tags }}{% endif %}"> {{ message }} </h1>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if form.non_field_errors %}
+<div class="container border border-success rounded">
+    <h3>{{ form.non_field_errors }}</h3>
+</div>
+{% endif %}
+
+    <form class="row prof-form g-3 border border-success rounded" action="" method="POST">
+        {% csrf_token %}
+        <h1 class="display-4 text-center text-success">Update Profile</h1>
+
+        <div class="col-md-6">
+            <label for="id_first_name" class="form-label">First Name</label>
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+        </div>
+        <div class="col-md-6">
+            <label for="id_last_name" class="form-label">Last Name</label>
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+        </div>
+        <div class="col-md-6">
+            <label for="id_email" class="form-label">Email Address</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+        <div class="col-md-2">
+            <label for="id_region" class="form-label">Region</label>
+            {% render_field form.region class+="form-select" %}
+            {{ form.region.errors }}
+        </div>
+        <div class="col-md-4">
+            <label for="id_user_supervisor" class="form-label">Supervisor</label>
+            {% render_field form.user_supervisor class+="form-select" %}
+            {{ form.user_supervisor.errors }}
+        </div>
+        <div class="col-md-4">
+            <label for="id_base" class="form-label">Base</label>
+            {{ form.base }}
+            {{ form.base.errors }}
+        </div>
+        <div class="col-md-2">
+            <label for="id_office_phone" class="form-label">Office Phone</label>
+            {{ form.office_phone }}
+            {{ form.office_phone.errors }}
+        </div>
+        <div class="col-md-2">
+            <label for="id_cell_phone" class="form-label">Cell Phone</label>
+            {{ form.cell_phone }}
+            {{ form.cell_phone.errors }}
+        </div>
+        <div class="col-md-2">
+            <label for="id_date_of_hire" class="form-label">Date of Hire</label>
+            {{ form.date_of_hire }}
+            {{ form.date_of_hire.errors }}
+        </div>
+        <div class="col-md-2">
+            {% if user.is_supervisor and user.id != object.id %}
+            <label for="id_is_active" class="form-label">Active?</label><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{% render_field form.is_active class="form-check-input" %}
+            {% endif %}
+        </div>
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10"><hr></div>        
+        <div class="col-md-1"></div>
+
+
+        <div class="col-md-2">
+            <label for="id_pilot_cert_number" class="form-label">Pilot Certificate Number</label>
+            {{ form.pilot_cert_number }}
+            {{ form.pilot_cert_number.errors }}
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="form-check">
+                <label for="id_cfi" class="form-check-label">CFI</label>
+                {% render_field form.cfi class="form-check-input" %}
+                {{ form.cfi.errors }}
+            </div>
+            <div class="form-check">
+                <label for="id_cfii" class="form-check-label">CFII</label>
+                {% render_field form.cfii class="form-check-input" %}
+                {{ form.cfii.errors }}
+            </div>
+            <div class="form-check">
+                <label for="id_mei" class="form-check-label">MEI</label>
+                {% render_field form.mei class="form-check-input" %}
+                {{ form.mei.errors }}
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <label for="id_atp" class="form-check-label">ATP</label>
+                {% render_field form.atp class="form-check-input" %}
+                {{ form.atp.errors }}
+            </div>
+            <div class="form-check">
+                <label for="id_commercial_rating" class="form-check-label">Commercial</label>
+                {% render_field form.commercial_rating class="form-check-input" %}
+                {{ form.commercial.errors }}
+            </div>
+            <div class="form-check">
+                <label for="id_commercial_rating" class="form-check-label">Sherpa Captain</label>
+                {% render_field form.is_captain class="form-check-input" %}
+                {{ form.is_captain.errors }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="id_medical_class" class="form-label">Medical Class</label>
+            {% render_field form.medical_class class+="form-select" %}
+            {{ form.medical_class.errors }}
+        </div>
+        <div class="col-md-2">
+            <label for="id_date_of_hire" class="form-label">Date of Medical</label>
+            {{ form.date_of_medical }}
+            {{ form.date_of_medical.errors }}
+        </div>
+        <div class="col-md-1"></div>
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10"><hr></div>        
+        <div class="col-md-1"></div>
+
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <label for="id_smokejumper_msn_eval_date" class="form-label">Smokejumper Msn Eval Date</label>
+            {{ form.smokejumper_msn_eval_date }}
+            {{ form.smokejumper_msn_eval_date.errors }}
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <label for="id_equipment_eval_date" class="form-label">Equipment Eval Date</label>
+            {{ form.equipment_eval_date }}
+            {{ form.equipment_eval_date.errors }}
+        </div>
+        <div class="col-md-3"></div>
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10"><hr></div>        
+        <div class="col-md-1"></div>
+
+        {% if object.id != user.id %}
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
+            <button class="btn submit_btn" type="submit">Update</button>
+        </div>
+        <div class="col-md-1">
+            <a class="btn cancel_btn" href="{% url 'currency_board' %}">Go Back</a>
+        </div>
+        {% else %}
+        <div class="d-grid gap-2 col-1 mx-auto">
+            <button class="btn submit_btn" type="submit">Update</button>
+        </div>
+        {% endif %}
+    </form>
+    {% endif %}
 {% endblock content %}

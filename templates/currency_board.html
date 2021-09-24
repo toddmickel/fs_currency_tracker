@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Subordinate List{% endblock title %}
+
+{% block content %}
+<div class="container border border-success rounded">
+    <table class="table table-hover">   
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Cell Phone</th>
+                <th scope="col">Date of Medical</th>
+                <th scope="col"></th>
+            </tr>
+        </thead> 
+        <tbody>
+            {% for pilot in object_list %}
+                <tr>
+                    <td>{{ pilot.first_name }} {{pilot.last_name }}</td>
+                    <td><a href="mailto:{{ pilot.email }}">{{ pilot.email }}</a></td>
+                    <td>{{ pilot.cell_phone }}</td>
+                    <td>{{ pilot.date_of_medical }}</td>
+                    <td>
+                        <a href="{% url 'profile' pilot.id %}" title="Edit profile">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        &nbsp;
+                        <a href="{% url 'currency_detail' pilot.id %}" title="View Currency">
+                            <i class="far fa-calendar-check"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
