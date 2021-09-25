@@ -20,3 +20,7 @@ class NewFlightForm(forms.ModelForm):
 
         self.fields['depart_ICAO'].widget.attrs['size'] = 4
         self.fields['arrival_ICAO'].widget.attrs['size'] = 4
+
+class FlightListFilterForm(forms.Form):
+    start_date = forms.DateField()
+    end_date = forms.DateField()

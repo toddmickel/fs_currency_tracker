@@ -14,6 +14,11 @@
 {% block content %}
 <div class="container border border-success rounded py-1">
 <h2 class="text-center">{{ user.first_name }}'s Flight History</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="id_start_date" class="form-label">Start Date:</label> {{ form.start_date }}
+    <label for="id_end_date" class="form-label">End Date:</label> {{ form.end_date }}
+</form>
 <table class="table">
     <thead style="position: sticky;top: 0" class="thead-light">
         <tr class="table-primary">

@@ -7,7 +7,7 @@ from django.views.generic.edit import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightDetail
 from django.urls import reverse, reverse_lazy
-from .forms import NewFlightForm
+from .forms import NewFlightForm, FlightListFilterForm
 
 class FlightCreateView(LoginRequiredMixin, CreateView):
     form_class = NewFlightForm
@@ -27,6 +27,7 @@ class FlightDetailView(LoginRequiredMixin, DetailView):
 
 class FlightListView(LoginRequiredMixin, ListView):
     model = FlightDetail
+    form_class = FlightListFilterForm
     template_name = "view_flights.html"
 
 class FlightUpdateView(LoginRequiredMixin, UpdateView):
