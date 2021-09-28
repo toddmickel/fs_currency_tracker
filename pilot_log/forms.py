@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets
 from .models import FlightDetail
+import datetime
 
 class NewFlightForm(forms.ModelForm):
     class Meta:
