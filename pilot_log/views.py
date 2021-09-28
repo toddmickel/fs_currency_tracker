@@ -8,6 +8,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightDetail
 from django.urls import reverse, reverse_lazy
 from .forms import NewFlightForm, FlightListFilterForm
+from datetime import date
+import datetime
+from django.http import HttpRequest
+from django.core.exceptions import ImproperlyConfigured
 
 class FlightCreateView(LoginRequiredMixin, CreateView):
     form_class = NewFlightForm
@@ -29,6 +33,39 @@ class FlightListView(LoginRequiredMixin, ListView):
     model = FlightDetail
     form_class = FlightListFilterForm
     template_name = "view_flights.html"
+    start_date = ''
+    end_date = ''
+
+    def get_start_date(self):
+        start_date = self.start_date
+        try:
+            start_date = self.request.GET['start_date']
+        except:
+            start_date = ''
+        if start_date is '':
+            start_date = date.today() - datetime.timedelta(weeks=2600)
+        return start_date
+
+    def get_end_date(self):
+        end_date = self.end_date
+        try:
+            end_date = self.request.GET['end_date']
+        except:
+            end_date = ''
+        if end_date is '':
+            end_date = date.today()
+        return end_date    
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        start = self.get_start_date()
+        end = self.get_end_date()
+
+        qs = qs.filter(
+            date_of_flight__gte=start,
+            date_of_flight__lte= end
+            )
+        return qs
 
 class FlightUpdateView(LoginRequiredMixin, UpdateView):
     model = FlightDetail
