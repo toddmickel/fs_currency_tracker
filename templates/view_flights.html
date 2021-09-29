@@ -17,9 +17,10 @@
 <form action="" method="GET">
     {% csrf_token %}
     <label for="start_date" class="form-label">Start Date:</label> 
-    <input type="date" id="start_date" name="start_date">&nbsp;&nbsp;
+    <input type="date" id="start_date" name="start_date" value="{{ earliest_filtered|date:'Y-m-d'}}">&nbsp;&nbsp;
     <label for="end_date" class="form-label">End Date:</label> 
-    <input type="date" id="end_date" name="end_date"><br>
+    <input type="date" id="end_date" name="end_date" value="{{ latest_filtered|date:'Y-m-d' }}"><br>
+    <p>Earliest record: {{ earliest|date:"m/d/Y" }}&nbsp;&nbsp;&nbsp;Latest Record: {{ latest|date:"m/d/Y" }}</p>
     <button class="btn submit_btn" type="submit">Filter</button>&nbsp;&nbsp;
     <button class="btn cancel_btn" type="reset">Clear</button>
 </form>
@@ -47,7 +48,7 @@
     </thead>
     <tbody>
         {% for flight in object_list %}
-        {% if flight.pilot == user %}
+
         <tr class="table-success border border-secondary">
             <th scope="row" class="border border-secondary">{{ flight.date_of_flight|date:"n/j/y" }}</th>
             <td class="border border-secondary">{{ flight.tail_number.tail_number }}<br>{{ flight.tail_number.aircraft_type }}</td>
@@ -73,7 +74,7 @@
             <td colspan = "17" class="text-start"><b>Remarks:</b>  {{ flight.remarks }}</td>
         </tr>
         <tr class="table-info border border-secondary"><td colspan = "17"></td></tr>
-        {% endif %}
+
         {% endfor %}
     </tbody>
 </table>

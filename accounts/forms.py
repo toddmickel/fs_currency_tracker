@@ -10,6 +10,10 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'region', 'user_supervisor', 'is_supervisor')
+    
+    def __init__(self, *args, **kwargs):
+            super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+            self.fields['is_supervisor'].label = "Is A Supervisor"
 
 class ProfileForm(forms.ModelForm):
     class Meta:
