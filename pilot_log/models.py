@@ -32,11 +32,11 @@ class FlightDetail(models.Model):
     total_time = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
     act_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
     sim_instrument_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
-    instrument_appchs = models.IntegerField(default=0)
-    holds = models.IntegerField(default=0)
-    day_landings = models.IntegerField(default=0)
+    instrument_appchs = models.PositiveIntegerField(default=0)
+    holds = models.PositiveIntegerField(default=0)
+    day_landings = models.PositiveIntegerField(default=0)
     night_time = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
-    night_landings = models.IntegerField(default=0)
+    night_landings = models.PositiveIntegerField(default=0)
     remarks = models.TextField(max_length=250, blank=True, default='')
 
     class Meta:

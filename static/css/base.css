@@ -156,6 +156,18 @@ form {
     background-color: var(--background);
 }
 
+.thead-fs {
+    color: white;
+}
+
+.table-fs {
+    background-color: var(--green_dark);
+}
+
+.table-fs-break {
+    background-color: var(--green_primary)
+}
+
 .s1 {
     cursor: pointer;
     padding: 5px;

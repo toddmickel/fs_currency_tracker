@@ -22,11 +22,11 @@
     <input type="date" id="end_date" name="end_date" value="{{ latest_filtered|date:'Y-m-d' }}"><br>
     <p>Earliest record: {{ earliest|date:"m/d/Y" }}&nbsp;&nbsp;&nbsp;Latest Record: {{ latest|date:"m/d/Y" }}</p>
     <button class="btn submit_btn" type="submit">Filter</button>&nbsp;&nbsp;
-    <button class="btn cancel_btn" type="reset">Clear</button>
+    <button class="btn cancel_btn" type="button" onclick="location.href='{% url 'flight_list' %}'">Reset Filter</button>
 </form>
-<table class="table">
-    <thead style="position: sticky;top: 0" class="thead-light">
-        <tr class="table-primary">
+<table class="table mt-3">
+    <thead style="position: sticky;top: 0" class="thead-fs">
+        <tr class="table-fs">
             <th scope="col">Date</th>
             <th scope="col">Tail #</th>
             <th scope="col">Dep</th>
@@ -73,7 +73,7 @@
         <tr class="table-success border border-secondary">
             <td colspan = "17" class="text-start"><b>Remarks:</b>  {{ flight.remarks }}</td>
         </tr>
-        <tr class="table-info border border-secondary"><td colspan = "17"></td></tr>
+        <tr class="table-fs-break border border-secondary"><td colspan = "17"></td></tr>
 
         {% endfor %}
     </tbody>
