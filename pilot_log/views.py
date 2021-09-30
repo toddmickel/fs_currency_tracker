@@ -42,7 +42,7 @@ class FlightListView(LoginRequiredMixin, ListView):
             start_date = self.request.GET['start_date']
         except:
             start_date = ''
-        if start_date is '':
+        if start_date == '':
             start_date = date.today() - datetime.timedelta(weeks=2600)
         return start_date
 
@@ -52,7 +52,7 @@ class FlightListView(LoginRequiredMixin, ListView):
             end_date = self.request.GET['end_date']
         except:
             end_date = ''
-        if end_date is '':
+        if end_date == '':
             end_date = date.today()
         return end_date    
 

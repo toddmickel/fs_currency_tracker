@@ -43,8 +43,9 @@ class CustomUser(AbstractUser):
         'self', 
         on_delete=models.PROTECT, 
         limit_choices_to={'is_supervisor': True},
-        blank=True, 
-        null=True
+        blank=False, 
+        null=True,
+        default=5
         )
     is_supervisor = models.BooleanField(default=False)
     is_captain = models.BooleanField(default=False)

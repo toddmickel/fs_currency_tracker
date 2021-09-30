@@ -17,6 +17,13 @@ class CustomUserAdmin(UserAdmin):
         else fieldset
         for fieldset in UserAdmin.fieldsets
     )
+    list_display = (
+        'id',
+        'first_name',
+        'last_name',
+        'is_active',
+        )
+    ordering = ('id',)
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(MsnQual)

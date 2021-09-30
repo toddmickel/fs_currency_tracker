@@ -14,6 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
             super(CustomUserCreationForm, self).__init__(*args, **kwargs)
             self.fields['is_supervisor'].label = "Is A Supervisor"
+            self.fields['user_supervisor'].empty_label = None
 
 class ProfileForm(forms.ModelForm):
     class Meta:

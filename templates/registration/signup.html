@@ -5,13 +5,19 @@
 
 {% block content %}
     {% if user.is_supervisor %}
-    <div class="col-md-8 offset-md-2" style="su1 max-width: 50%;">
-        <h2 class="su1">Sign Up</h2>
+    <div class="container border border-success rounded py-1 text-start" style="max-width: 50%;">
+        <h2 class="text-center">Sign Up</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="btn btn-success ml-2" type="submit">Sign Up</button>
+            <div class="text-center">
+                <button class="btn btn-success ml-2" type="submit">Sign Up</button>
+            </div>
         </form>
+    </div>
+    {% else %}
+    <div class="container border border-success rounded py-1">
+        <h3>You are not authorized to create users.</h3>
     </div>
     {% endif %}
 {% endblock content %}

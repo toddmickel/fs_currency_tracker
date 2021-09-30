@@ -21,6 +21,12 @@ class NewFlightForm(forms.ModelForm):
 
         self.fields['depart_ICAO'].widget.attrs['size'] = 4
         self.fields['arrival_ICAO'].widget.attrs['size'] = 4
+        self.fields['pic_time'].widget.attrs['min'] = 0.0
+        self.fields['sic_time'].widget.attrs['min'] = 0.0
+        self.fields['instructor_time'].widget.attrs['min'] = 0.0
+        self.fields['act_instrument_time'].widget.attrs['min'] = 0.0
+        self.fields['sim_instrument_time'].widget.attrs['min'] = 0.0
+        self.fields['night_time'].widget.attrs['min'] = 0.0
 
 class FlightListFilterForm(forms.Form):
     start_date = forms.DateField()

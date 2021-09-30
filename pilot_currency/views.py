@@ -264,9 +264,18 @@ class CurrencyBoardView(LoginRequiredMixin, ListView):
         qs = super().get_queryset()
         return qs.filter(user_supervisor=self.request.user.id)
     
-    """ def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] =  """
+        try:
+            context['active_users'] = self.object_list.filter(is_active=True)
+        except:
+            context['active_users'] = None
+
+        try:
+            context['inactive_users'] = self.object_list.filter(is_active=False)
+        except:
+            context['inactive_users'] = None
+        return context
 
 
 def get_crit_ldgs(
