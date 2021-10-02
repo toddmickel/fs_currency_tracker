@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'whitenoise.runserver_nostatic',
     'widget_tweaks',
-    
+    'explorer',
 
     # locally developed apps
     'accounts',
@@ -184,3 +184,7 @@ LOGIN_REDIRECT_URL = '/pilot_currency'
 LOGOUT_REDIRECT_URL = 'home'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Explorer settings for reports
+EXPLORER_CONNECTIONS = { 'Default': 'default' }
+EXPLORER_DEFAULT_CONNECTION = 'default'
