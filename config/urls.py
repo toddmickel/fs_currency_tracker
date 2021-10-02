@@ -23,4 +23,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('pilot_log/', include('pilot_log.urls')),
     path('pilot_currency/', include('pilot_currency.urls')),
+    path('explorer/', include('explorer.urls')),
 ]
