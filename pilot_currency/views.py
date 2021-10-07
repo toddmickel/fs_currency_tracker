@@ -17,7 +17,6 @@ def total_hours(user):
 class CurrencyDetailView(LoginRequiredMixin, ListView):
     template_name = 'currency_detail.html'
     model = FlightDetail
-    today = date.today()
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -61,10 +60,11 @@ class CurrencyDetailView(LoginRequiredMixin, ListView):
         for key in ninety_day_tt_currency:
             context[key] = ninety_day_tt_currency[key]
 
+        return context
+
 class CurrencyBoardView(LoginRequiredMixin, ListView):
     template_name = 'currency_board.html'
     model = CustomUser
-    today = date.today()
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -155,11 +155,14 @@ def get_90_day_landing_currency(ninety_day):
         sel_landings = sel_landings_q.aggregate(Sum('day_landings'), Sum('night_landings'))
         sel_ldg_tot = int(f"{sel_landings['day_landings__sum']}") + int(f"{sel_landings['night_landings__sum']}")
         currency['sel_landings'] = sel_ldg_tot
-        last_sel_ldg = sel_landings_q.filter(
-            Q(day_landings__gt=0) |
-            Q(night_landings__gt=0)
-        ).latest().date_of_flight
-        currency['last_sel_ldg'] = last_sel_ldg
+        try:
+            last_sel_ldg = sel_landings_q.filter(
+                Q(day_landings__gt=0) |
+                Q(night_landings__gt=0)
+            ).latest().date_of_flight
+            currency['last_sel_ldg'] = last_sel_ldg
+        except:
+            last_sel_ldg = date(2900, 1, 1)
     else:
         last_sel_ldg = date(2900, 1, 1)
         sel_ldg_tot = 0
@@ -171,11 +174,14 @@ def get_90_day_landing_currency(ninety_day):
         mel_landings = mel_landings_q.aggregate(Sum('day_landings'), Sum('night_landings'))
         mel_ldg_tot = int(f"{mel_landings['day_landings__sum']}") + int(f"{mel_landings['night_landings__sum']}")
         currency['mel_landings'] = mel_ldg_tot
-        last_mel_ldg = mel_landings_q.filter(
-            Q(day_landings__gt=0) |
-            Q(night_landings__gt=0)
-        ).latest().date_of_flight
-        currency['last_mel_ldg'] = last_mel_ldg
+        try:
+            last_mel_ldg = mel_landings_q.filter(
+                Q(day_landings__gt=0) |
+                Q(night_landings__gt=0)
+            ).latest().date_of_flight
+            currency['last_mel_ldg'] = last_mel_ldg
+        except:
+            last_mel_ldg = date(2900, 1, 1)
     else:
         last_mel_ldg = date(2900, 1, 1)
         mel_ldg_tot = 0
@@ -185,11 +191,14 @@ def get_90_day_landing_currency(ninety_day):
         sherpa_landings = sherpa_landings_q.aggregate(Sum('day_landings'), Sum('night_landings'))
         sherpa_ldg_tot = int(f"{sherpa_landings['day_landings__sum']}") + int(f"{sherpa_landings['night_landings__sum']}")
         currency['sherpa_landings'] = sherpa_ldg_tot
-        last_sherpa_ldg = sherpa_landings_q.filter(
-            Q(day_landings__gt=0) |
-            Q(night_landings__gt=0)
-        ).latest().date_of_flight
-        currency['last_sherpa_ldg'] = last_sherpa_ldg
+        try:
+            last_sherpa_ldg = sherpa_landings_q.filter(
+                Q(day_landings__gt=0) |
+                Q(night_landings__gt=0)
+            ).latest().date_of_flight
+            currency['last_sherpa_ldg'] = last_sherpa_ldg
+        except:
+            last_sherpa_ldg = date(2900, 1, 1)
     else:
         last_sherpa_ldg = date(2900, 1, 1)
         sherpa_ldg_tot = 0
