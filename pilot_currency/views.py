@@ -1,10 +1,13 @@
 import django.core.exceptions
 from django.db.models import Sum, Q
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
+from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from slick_reporting.views import SlickReportView
+from slick_reporting.fields import SlickReportField
 from pilot_log.models import FlightDetail
 from accounts.models import CustomUser
 
@@ -301,3 +304,29 @@ def get_crit_tt(
         return 'mel'
     else:
         return 'sherpa'    
+
+class TotalTimesReportView(LoginRequiredMixin, SlickReportView):
+    report_model = FlightDetail        
+    date_field = 'date_of_flight'
+    columns = ['pilot__last_name', 
+                SlickReportField.create(
+                    method=Sum,
+                    field='total_time',
+                    name='total_time__sum',
+                    verbose_name=('Sum of Total Time'))
+                ]
+    group_by = 'pilot__last_name'
+
+    chart_settings = [
+            {
+                'type': 'column',
+                'data_source': ['total_time__sum'],
+                'title_source': ['total_time'],
+                'title': 'Total Time by Pilot',
+                'title_source': 'pilot__last_name',
+            }
+        ]
+
+class ListReportsView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'reports.html')
