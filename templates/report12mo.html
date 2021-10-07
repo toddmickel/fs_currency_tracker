@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}12 month report{% endblock title %}
+
+{% block content %}
+<form class="row prof-form g-3 border border-success rounded" action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+</form>
+{% endblock content %}

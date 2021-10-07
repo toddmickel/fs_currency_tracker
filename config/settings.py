@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'widget_tweaks',
     'explorer',
+    'slick_reporting',
 
     # locally developed apps
     'accounts',
@@ -188,3 +190,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Explorer settings for reports
 EXPLORER_CONNECTIONS = { 'Default': 'default' }
 EXPLORER_DEFAULT_CONNECTION = 'default'
+EXPLORER_PERMISSION_VIEW = lambda r: r.user.is_supervisor
+
+# Slick Reporting settings
+def start_date():
+    d = datetime.datetime.today()
+    return datetime.datetime(d.year - 1, d.month, d.day, 0, 0)
+
+SLICK_REPORTING_DEFAULT_START_DATE = start_date()
+SLICK_REPORTING_DEFAULT_END_DATE = datetime.datetime.today()
