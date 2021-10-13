@@ -20,7 +20,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = [
-            'id', 'first_name', 'last_name', 'email',
+            'id', 'first_name', 'last_name', 'email', 'is_supervisor',
             'region', 'user_supervisor', 'base', 'is_active',
             'office_phone', 'cell_phone', 'date_of_hire',
             'pilot_cert_number', 'atp', 'cfi', 'cfii', 'mei',
