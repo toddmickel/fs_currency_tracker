@@ -1,13 +1,10 @@
 import django.core.exceptions
-from django.db.models import Sum, Q
-from django.shortcuts import get_object_or_404, render
+from django.db.models import Sum, Q, Prefetch
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
-from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from slick_reporting.views import SlickReportView
-from slick_reporting.fields import SlickReportField
 from pilot_log.models import FlightDetail
 from accounts.models import CustomUser
 
@@ -83,6 +80,36 @@ class CurrencyBoardView(LoginRequiredMixin, ListView):
             context['inactive_users'] = None
         return context
 
+class CurrencyStatusView(LoginRequiredMixin, ListView):
+    template_name = 'currency_status.html'
+    model = FlightDetail
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        try: self.kwargs['uid']
+        except KeyError:
+            return qs.values('pilot__last_name').filter(pilot__user_supervisor=self.request.user.id)
+        else:
+            return qs.values('pilot__last_name').filter(pilot__user_supervisor=self.kwargs['uid']) 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+
+        for pilot in self.object_list.values('pilot__id', 'pilot__last_name', 'pilot__first_name'):
+            pilot_records = self.object_list.filter(pilot__id=pilot['pilot__id'])
+
+            twelve_mo_records = get_12_mo_records(pilot_records)
+            twelve_mo_times = get_12_mo_currency_items(twelve_mo_records)
+            context['12_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_12_mo_currency(twelve_mo_times)
+
+            six_mo_records = get_6_mo_records(pilot_records)
+            six_mo_times = get_6_mo_currency_items(six_mo_records)
+            context['6_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_6_mo_currency(six_mo_times)
+
+
+        return context
+
 
 
 def get_12_mo_records(object_list):
@@ -118,6 +145,15 @@ def get_12_mo_currency_items(twelve_mo):
 
     return currency
 
+def check_12_mo_currency(flight_records):
+    min_flt_time = 100
+    min_lg_me_flt_time = 25
+
+    if flight_records["12_mo"] >= min_flt_time and flight_records["12_mo_heavy"] >= min_lg_me_flt_time:
+        return True
+    else:
+        return False
+
 
 def get_6_mo_currency_items(six_mo):
     currency = {
@@ -130,15 +166,29 @@ def get_6_mo_currency_items(six_mo):
     if six_mo.filter(instrument_appchs__gt=0):
         inst_appch = six_mo.aggregate(Sum('instrument_appchs'))
         currency["6_mo_inst"] = int(f"{inst_appch['instrument_appchs__sum']}")
-        currency["latest_inst"] = six_mo.filter(instrument_appchs__gt=0).latest().date_of_flight
+        try:
+            currency["latest_inst"] = six_mo.filter(instrument_appchs__gt=0).latest().date_of_flight
+        except:
+            currency["latest_inst"] = date(2900, 1, 1)
 
     if six_mo.filter(holds__gt=0):
         holds = six_mo.aggregate(Sum('holds'))
         currency["6_mo_holds"] = int(f"{holds['holds__sum']}")
-        currency["latest_hold"] = six_mo.filter(holds__gt=0).latest().date_of_flight
+        try:
+            currency["latest_hold"] = six_mo.filter(holds__gt=0).latest().date_of_flight
+        except:
+            currency["latest_hold"] = date(2900, 1, 1)
 
     return currency
 
+def check_6_mo_currency(flight_records):
+    min_inst = 6
+    min_hold = 1
+
+    if flight_records["6_mo_inst"] >= min_inst and flight_records["6_mo_holds"] >= min_hold:
+        return True
+    else:
+        return False
 
 def get_90_day_landing_currency(ninety_day):
     currency = {
@@ -336,29 +386,3 @@ def get_crit_tt(
         return 'mel'
     else:
         return 'sherpa'    
-
-class TotalTimesReportView(LoginRequiredMixin, SlickReportView):
-    report_model = FlightDetail        
-    date_field = 'date_of_flight'
-    columns = ['pilot__last_name', 
-                SlickReportField.create(
-                    method=Sum,
-                    field='total_time',
-                    name='total_time__sum',
-                    verbose_name=('Sum of Total Time'))
-                ]
-    group_by = 'pilot__last_name'
-
-    chart_settings = [
-            {
-                'type': 'column',
-                'data_source': ['total_time__sum'],
-                'title_source': ['total_time'],
-                'title': 'Total Time by Pilot',
-                'title_source': 'pilot__last_name',
-            }
-        ]
-
-class ListReportsView(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'reports.html')

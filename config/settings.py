@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'crispy_forms',
+    'debug_toolbar',
     'whitenoise.runserver_nostatic',
     'widget_tweaks',
     'explorer',
@@ -52,9 +53,11 @@ INSTALLED_APPS = [
     'pages',
     'pilot_currency',
     'pilot_log',
+    'reports',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -199,3 +202,12 @@ def start_date():
 
 SLICK_REPORTING_DEFAULT_START_DATE = start_date()
 SLICK_REPORTING_DEFAULT_END_DATE = datetime.datetime.today()
+
+
+# Django Debug Toolbar settings
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TEMPLATE_CONTEXT': True,
+}

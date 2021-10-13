@@ -1,10 +1,15 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 
 <html>
-    <head>       
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">       
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
@@ -51,7 +56,8 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="SupDropdown">
                                 <li><a class="dropdown-item pa_2" href="{% url 'signup' %}">Create User</a></li>
-                                <li><a class="dropdown-item pa_2" href="{% url 'currency_board' %}">View Currency Board</a></li>
+                                <li><a class="dropdown-item pa_2" href="{% url 'currency_board' %}">View Subordinate List</a></li>
+                                <li><a class="dropdown-item pa_2" href="{% url 'reports' %}">Reports</a></li>
                             </ul>
                         </li>
                         {% endif %}
@@ -95,7 +101,11 @@
         </nav>                            
 
         {% block content %}
+
         {% endblock content %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
 
         <script 
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 

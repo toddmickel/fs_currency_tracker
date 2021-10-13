@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Currency Status{% endblock title %}
+
+{% block content %}
+<div class="container">
+    {{ 12_mo_status }}
+    {% for flight in object_list %}
+        {{ flight }}
+    {% endfor %}
+    <hr>
+    {% for flightdetail in flightdetail_list %}
+        {{ flightdetail.pilot__last_name }}
+    {% endfor %}
+</div>
+{% endblock content %}

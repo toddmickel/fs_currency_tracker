@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.urls import reverse
+from pilot_log.models import FlightDetail
 
 
 class CustomUser(AbstractUser):
