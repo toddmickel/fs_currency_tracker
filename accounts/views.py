@@ -1,10 +1,10 @@
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import ProfileForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
+from .forms import CustomUserCreationForm
+from .forms import ProfileForm
 from .models import CustomUser
 
 
@@ -23,6 +23,4 @@ class ProfileView(LoginRequiredMixin, generic.edit.UpdateView):
         self.object.save()
         messages.success(self.request, 'Profile Successfully Updated')
         return super().form_valid(form)
-
-
 

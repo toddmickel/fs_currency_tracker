@@ -93,21 +93,43 @@ class CurrencyStatusView(LoginRequiredMixin, ListView):
             return qs.values('pilot__last_name').filter(pilot__user_supervisor=self.kwargs['uid']) 
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-
-        for pilot in self.object_list.values('pilot__id', 'pilot__last_name', 'pilot__first_name'):
+        context = {}
+        results = {}
+        i = 1
+        for pilot in self.object_list.values('pilot__id', 'pilot__last_name', 'pilot__first_name').distinct().order_by('pilot__last_name', 'pilot__first_name'):
             pilot_records = self.object_list.filter(pilot__id=pilot['pilot__id'])
 
             twelve_mo_records = get_12_mo_records(pilot_records)
             twelve_mo_times = get_12_mo_currency_items(twelve_mo_records)
-            context['12_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_12_mo_currency(twelve_mo_times)
+            # context['12_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_12_mo_currency(twelve_mo_times)
 
             six_mo_records = get_6_mo_records(pilot_records)
             six_mo_times = get_6_mo_currency_items(six_mo_records)
-            context['6_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_6_mo_currency(six_mo_times)
+            # context['6_mo_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = check_6_mo_currency(six_mo_times)
 
-
+            ninety_day_records = get_90_day_records(pilot_records)
+            ninety_day_landing = get_90_day_landing_currency(ninety_day_records)
+            ninety_day_night = get_90_day_nt_currency(ninety_day_records)
+            ninety_day_times = get_90_day_tt_currency(ninety_day_records)
+            """ context['90_day_sel_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = (
+                check_90_day_sel(ninety_day_landing, ninety_day_times))
+            context['90_day_mel_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = (
+                check_90_day_mel(ninety_day_landing, ninety_day_night, ninety_day_times))
+            context['90_day_sherpa_' + pilot['pilot__last_name'] + '_' + pilot['pilot__first_name']] = (
+                check_90_day_sherpa(ninety_day_landing, ninety_day_night, ninety_day_times)) """
+            curr_status = {
+                'pilot': pilot['pilot__last_name'] + ', ' + pilot['pilot__first_name'],
+                'pilot_id': pilot['pilot__id'],
+                '12_mo': check_12_mo_currency(twelve_mo_times),
+                '6_mo': check_6_mo_currency(six_mo_times),
+                '90_day_sel': check_90_day_sel(ninety_day_landing, ninety_day_times),
+                '90_day_mel': check_90_day_mel(ninety_day_landing, ninety_day_night, ninety_day_times),
+                '90_day_sherpa': check_90_day_sherpa(ninety_day_landing, ninety_day_night, ninety_day_times),
+                }
+            results['curr' + str(i)] = curr_status
+            i += 1
+        context['numrecs'] = range(i-1)
+        context['results'] = results
         return context
 
 
@@ -146,13 +168,17 @@ def get_12_mo_currency_items(twelve_mo):
     return currency
 
 def check_12_mo_currency(flight_records):
-    min_flt_time = 100
-    min_lg_me_flt_time = 25
+    yellow_flt_time = 100
+    green_flt_time = 120
+    yellow_lg_me_flt_time = 25
+    green_lg_me_flt_time = 30
 
-    if flight_records["12_mo"] >= min_flt_time and flight_records["12_mo_heavy"] >= min_lg_me_flt_time:
-        return True
+    if flight_records["12_mo"] >= green_flt_time and flight_records["12_mo_heavy"] >= green_lg_me_flt_time:
+        return 'green'
+    elif flight_records["12_mo"] < yellow_flt_time and flight_records["12_mo_heavy"] < yellow_lg_me_flt_time:
+        return 'red'
     else:
-        return False
+        return 'yellow'
 
 
 def get_6_mo_currency_items(six_mo):
@@ -182,13 +208,17 @@ def get_6_mo_currency_items(six_mo):
     return currency
 
 def check_6_mo_currency(flight_records):
-    min_inst = 6
-    min_hold = 1
+    yellow_inst = 6
+    green_inst = 10
+    yellow_hold = 1
+    green_hold = 2
 
-    if flight_records["6_mo_inst"] >= min_inst and flight_records["6_mo_holds"] >= min_hold:
-        return True
+    if flight_records["6_mo_inst"] >= green_inst and flight_records["6_mo_holds"] >= green_hold:
+        return 'green'
+    elif flight_records["6_mo_inst"] < yellow_inst and flight_records["6_mo_holds"] < yellow_hold:
+        return 'red'
     else:
-        return False
+        return 'yellow'
 
 def get_90_day_landing_currency(ninety_day):
     currency = {
@@ -278,7 +308,10 @@ def get_90_day_nt_currency(ninety_day):
         mel_nt_landings = mel_nt_landings_q.aggregate(Sum('night_landings'))
         mel_nt_ldg_tot = int(f"{mel_nt_landings['night_landings__sum']}")
         currency['mel_nt_landings'] = mel_nt_ldg_tot
-        last_mel_nt_ldg = mel_nt_landings_q.latest().date_of_flight
+        try:
+            last_mel_nt_ldg = mel_nt_landings_q.latest().date_of_flight
+        except:
+            last_mel_nt_ldg = date(2900, 1, 1)
         currency['last_mel_nt_ldg'] = last_mel_nt_ldg
     else:
         mel_nt_ldg_tot = 0
@@ -292,7 +325,10 @@ def get_90_day_nt_currency(ninety_day):
         sherpa_nt_landings = sherpa_nt_landings_q.aggregate(Sum('night_landings'))
         sherpa_nt_ldg_tot = int(f"{sherpa_nt_landings['night_landings__sum']}")
         currency['sherpa_nt_landings'] = sherpa_nt_ldg_tot
-        last_sherpa_nt_ldg = sherpa_nt_landings_q.latest().date_of_flight
+        try:
+            last_sherpa_nt_ldg = sherpa_nt_landings_q.latest().date_of_flight
+        except:
+            last_sherpa_nt_ldg = date(2900, 1, 1)
         currency['last_sherpa_nt_ldg'] = last_sherpa_nt_ldg
     else:
         sherpa_nt_ldg_tot = 0
@@ -324,7 +360,10 @@ def get_90_day_tt_currency(ninety_day):
         sel_ninety_time = sel_ninety_time_q.aggregate(Sum('total_time'))
         sel_ninety_tt = float(f"{sel_ninety_time['total_time__sum']}")
         currency['sel_90_tt'] = sel_ninety_tt
-        last_sel_flt = sel_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        try:
+            last_sel_flt = sel_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        except:
+            last_sel_flt = date(2900, 1, 1)
         currency['last_sel_flt'] = last_sel_flt
     else:
         sel_ninety_tt = 0
@@ -338,7 +377,10 @@ def get_90_day_tt_currency(ninety_day):
         mel_ninety_time = mel_ninety_time_q.aggregate(Sum('total_time'))
         mel_ninety_tt = float(f"{mel_ninety_time['total_time__sum']}")
         currency['mel_90_tt'] = mel_ninety_tt
-        last_mel_flt = mel_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        try:
+            last_mel_flt = mel_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        except:
+            last_mel_flt = date(2900, 1, 1)
         currency['last_mel_flt'] = last_mel_flt
     else:
         mel_ninety_tt = 0
@@ -349,7 +391,10 @@ def get_90_day_tt_currency(ninety_day):
         sherpa_ninety_time = sherpa_ninety_time_q.aggregate(Sum('total_time'))
         sherpa_ninety_tt = float(f"{sherpa_ninety_time['total_time__sum']}")
         currency['sherpa_90_tt'] = sherpa_ninety_tt
-        last_sherpa_flt = sherpa_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        try:
+            last_sherpa_flt = sherpa_ninety_time_q.filter(total_time__gt=0).latest().date_of_flight
+        except:
+            last_sherpa_flt = date(2900, 1, 1)
         currency['last_sherpa_flt'] = last_sherpa_flt
     else:
         sherpa_ninety_tt = 0
@@ -362,6 +407,59 @@ def get_90_day_tt_currency(ninety_day):
     )
 
     return currency
+
+def check_90_day_sel(flight_records_ldg, flight_records_tt):
+    yellow_ldg = 3
+    green_ldg = 6
+    yellow_tt = 1
+    green_tt = 6
+
+    if flight_records_ldg["sel_landings"] >= green_ldg and flight_records_tt["sel_90_tt"] >= green_tt:
+        return 'green'
+    elif flight_records_ldg["sel_landings"] < yellow_ldg and flight_records_tt["sel_90_tt"] < yellow_tt:
+        return 'red'
+    else:
+        return 'yellow'
+
+def check_90_day_mel(flight_records_ldg, flight_records_nt, flight_records_tt):
+    yellow_ldg = 3
+    green_ldg = 6
+    green_nt_ldg = 3
+    yellow_tt = 1
+    green_tt = 6
+
+    if (
+        flight_records_ldg["mel_landings"] >= green_ldg and 
+        flight_records_nt["mel_nt_landings"] >= green_nt_ldg and 
+        flight_records_tt["mel_90_tt"] >= green_tt):
+            return 'green'
+    elif (
+        flight_records_ldg["mel_landings"] < yellow_ldg and 
+        flight_records_nt["mel_nt_landings"] < green_nt_ldg and
+        flight_records_tt["mel_90_tt"] < yellow_tt):
+            return 'red'
+    else:
+        return 'yellow'
+
+def check_90_day_sherpa(flight_records_ldg, flight_records_nt, flight_records_tt):
+    yellow_ldg = 3
+    green_ldg = 6
+    green_nt_ldg = 3
+    yellow_tt = 1
+    green_tt = 6
+
+    if (
+        flight_records_ldg["sherpa_landings"] >= green_ldg and 
+        flight_records_nt["sherpa_nt_landings"] >= green_nt_ldg and 
+        flight_records_tt["sherpa_90_tt"] >= green_tt):
+            return 'green'
+    elif (
+        flight_records_ldg["sherpa_landings"] < yellow_ldg and 
+        flight_records_nt["sherpa_nt_landings"] < green_nt_ldg and
+        flight_records_tt["sherpa_90_tt"] < yellow_tt):
+            return 'red'
+    else:
+        return 'yellow'
 
 def get_crit_ldgs(
     last_sel, sel_ldg, 

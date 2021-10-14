@@ -1,17 +1,96 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load status_filter %}
 
 {% block title %}Currency Status{% endblock title %}
 
 {% block content %}
-<div class="container">
-    {{ 12_mo_status }}
-    {% for flight in object_list %}
-        {{ flight }}
-    {% endfor %}
-    <hr>
-    {% for flightdetail in flightdetail_list %}
-        {{ flightdetail.pilot__last_name }}
-    {% endfor %}
+<div class="container border border-success rounded py-1">
+    {% if not results %}
+        <h3>No Subordinates Found</h3>
+        <h4>Ensure you have subordinates assigned to you and try again.</h4>
+    {% else %}
+        <h3>Subordinate Currency Status</h3>
+        <table class="table mt-3">
+            <thead style="position: sticky;top: 0" class="thead-fs">
+                <tr class="table-fs">
+                    <th class="align-middle" scope="col" colspan="2" rowspan="2">Pilot</th>
+                    <th class="align-middle" scope="col" rowspan="2">12 month</th>
+                    <th class="align-middle" scope="col" rowspan="2">&nbsp;6 month</th>
+                    <th scope="col" colspan="3">90 day</th>
+                </tr>
+                <tr class="table-fs">
+                    <th scope="col">&nbsp;SEL&nbsp;&nbsp;</th>
+                    <th scope="col">&nbsp;MEL&nbsp;&nbsp;</th>
+                    <th scope="col">Sherpa</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for curr in results.values %}
+
+                    <tr class="table-success border border-secondary">
+                        <td class="border border-dark" colspan="2">
+                            <a href="{% url 'currency_detail' curr.pilot_id %}" title="View Currency">
+                            {{ curr.pilot }}
+                            </a>
+                        </td>
+                        
+                        {% if curr.12_mo == 'red' %}
+                        <td class="table-danger text-center border border-dark"></td>
+                        {% elif curr.12_mo == 'yellow' %}
+                        <td class="table-warning text-center border border-dark"></td>
+                        {% elif curr.12_mo == 'green' %}
+                        <td class="table-success text-center border border-dark"></td>
+                        {% else %}
+                        <td>Error!</td>
+                        {% endif %}
+
+                        {% if curr.6_mo == 'red' %}
+                        <td class="table-danger text-center border border-dark"></td>
+                        {% elif curr.6_mo == 'yellow' %}
+                        <td class="table-warning text-center border border-dark"></td>
+                        {% elif curr.6_mo == 'green' %}
+                        <td class="table-success text-center border border-dark"></td>
+                        {% else %}
+                        <td>Error!</td>
+                        {% endif %} 
+                        
+                        {% if curr.90_day_sel == 'red' %}
+                        <td class="table-danger text-center border border-dark"></td>
+                        {% elif curr.90_day_sel == 'yellow' %}
+                        <td class="table-warning text-center border border-dark"></td>
+                        {% elif curr.90_day_sel == 'green' %}
+                        <td class="table-success text-center border border-dark"></td>
+                        {% else %}
+                        <td>Error!</td>
+                        {% endif %}
+
+                        {% if curr.90_day_mel == 'red' %}
+                        <td class="table-danger text-center border border-dark"></td>
+                        {% elif curr.90_day_mel == 'yellow' %}
+                        <td class="table-warning text-center border border-dark"></td>
+                        {% elif curr.90_day_mel == 'green' %}
+                        <td class="table-success text-center border border-dark"></td>
+                        {% else %}
+                        <td>Error!</td>
+                        {% endif %}
+
+                        {% if curr.90_day_sherpa == 'red' %}
+                        <td class="table-danger text-center border border-dark"></td>
+                        {% elif curr.90_day_sherpa == 'yellow' %}
+                        <td class="table-warning text-center border border-dark"></td>
+                        {% elif curr.90_day_sherpa == 'green' %}
+                        <td class="table-success text-center border border-dark"></td>
+                        {% else %}
+                        <td>Error!</td>
+                        {% endif %}
+
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </div>
 {% endblock content %}

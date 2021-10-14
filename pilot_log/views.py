@@ -69,11 +69,14 @@ class FlightListView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
-        context['earliest'] = FlightDetail.objects.filter(pilot=self.request.user).earliest('date_of_flight').date_of_flight
-        context['latest'] = FlightDetail.objects.filter(pilot=self.request.user).latest('date_of_flight').date_of_flight
-        context['earliest_filtered'] = self.object_list.earliest('date_of_flight').date_of_flight
-        context['latest_filtered'] = self.object_list.latest('date_of_flight').date_of_flight
-        return context
+        try:
+            context['earliest'] = FlightDetail.objects.filter(pilot=self.request.user).earliest('date_of_flight').date_of_flight
+            context['latest'] = FlightDetail.objects.filter(pilot=self.request.user).latest('date_of_flight').date_of_flight
+            context['earliest_filtered'] = self.object_list.earliest('date_of_flight').date_of_flight
+            context['latest_filtered'] = self.object_list.latest('date_of_flight').date_of_flight
+            return context
+        except:
+            return context
 
 class FlightUpdateView(LoginRequiredMixin, UpdateView):
     model = FlightDetail
