@@ -242,7 +242,7 @@
         </table>
         {% if object_list.0.pilot.id != user.id %}
         <div class="d-flex justify-content-evenly py-3">
-            <a class="btn cancel_btn" href="{% url 'currency_board' %}">Go Back</a>
+            <input type="button" value="Go Back" class="btn cancel_btn" onclick="history.back()">
         </div>
         {% endif %}
         {% endif %}
