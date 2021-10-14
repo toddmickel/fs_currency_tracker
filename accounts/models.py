@@ -19,8 +19,7 @@ class CustomUser(AbstractUser):
         ('10', '10 - Alaska'),
         ('WO', 'Washington Office'),
     ] 
-    '''username = None
-    email = models.EmailField(_('email address'), unique=True)'''
+
     region = models.CharField(
         max_length=4, 
         choices=REGION_CHOICES,

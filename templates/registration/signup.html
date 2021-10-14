@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Sign Up{% endblock title %}
+{% block title %}Create User{% endblock title %}
 
 {% block content %}
     {% if user.is_supervisor %}
     <div class="container border border-success rounded py-1 text-start" style="max-width: 50%;">
-        <h2 class="text-center">Sign Up</h2>
+        <h2 class="text-center">Create User</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="text-center">
-                <button class="btn btn-success ml-2" type="submit">Sign Up</button>
+                <button class="btn btn-success ml-2" type="submit">Create</button>
             </div>
         </form>
     </div>
