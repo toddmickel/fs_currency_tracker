@@ -26,5 +26,4 @@ urlpatterns = [
     path('pilot_currency/', include('pilot_currency.urls')),
     path('explorer/', include('explorer.urls')),
     path('reports/', include('reports.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
 ]
