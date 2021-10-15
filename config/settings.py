@@ -45,14 +45,12 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'widget_tweaks',
     'explorer',
-    'slick_reporting',
 
     # locally developed apps
     'accounts',
     'pages',
     'pilot_currency',
     'pilot_log',
-    'reports',
 ]
 
 MIDDLEWARE = [
@@ -197,9 +195,6 @@ EXPLORER_PERMISSION_VIEW = lambda r: r.user.is_supervisor
 def start_date():
     d = datetime.datetime.today()
     return datetime.datetime(d.year - 1, d.month, d.day, 0, 0)
-
-SLICK_REPORTING_DEFAULT_START_DATE = start_date()
-SLICK_REPORTING_DEFAULT_END_DATE = datetime.datetime.today()
 
 
 # Django Debug Toolbar settings
