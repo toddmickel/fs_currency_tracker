@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'crispy_forms',
-    'debug_toolbar',
     'whitenoise.runserver_nostatic',
     'widget_tweaks',
     'explorer',
@@ -57,7 +56,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
